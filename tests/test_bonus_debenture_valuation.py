@@ -1,10 +1,12 @@
 import hashlib
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import pytest
+import brindco_momentum.data.bonus_debenture_valuation as valuation_module
 
-from bonus_debenture_valuation import (
+from brindco_momentum.data.bonus_debenture_valuation import (
     ACCEPTED_NON_TARGET_SHA256,
     AUDIT_DIR,
     DETAIL_OUTPUT,
@@ -23,7 +25,7 @@ from bonus_debenture_valuation import (
     select_yield_proxy,
     validate_yield_observation_date,
 )
-from corporate_action_treatment import DATA_CUTOFF, PARENT_EVENTS, validate_treatments
+from brindco_momentum.data.corporate_action_treatment import DATA_CUTOFF, PARENT_EVENTS, validate_treatments
 
 
 def test_deterministic_bond_present_value():
@@ -208,7 +210,7 @@ def test_bonus_debenture_stage_obeys_the_cutoff():
         detail.loc[observed, "yield_observation_date"]
         <= detail.loc[observed, "equity_ex_date"]
     ).all()
-    source = (ROOT / "bonus_debenture_valuation.py").read_text(encoding="utf-8")
+    source = Path(valuation_module.__file__).read_text(encoding="utf-8")
     assert "MARKET_DATA" not in source
 
 

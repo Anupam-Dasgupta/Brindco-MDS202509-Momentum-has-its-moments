@@ -5,11 +5,11 @@ from math import floor
 import pandas as pd
 import pytest
 
-from account_engine import AccountState
-from development_accounts import (
+from brindco_momentum.execution.account_engine import AccountState
+from brindco_momentum.execution.development_accounts import (
     CUTOFF, DHANI_RIGHT, OUT, _apply_events, _apply_split, _expire_rights,
 )
-from tax_model import Lot
+from brindco_momentum.execution.tax_model import Lot
 
 
 OLD_OUT = OUT.parent / "passive_lapse"

@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from panel_build import (
+from brindco_momentum.data.panel_build import (
     BRITANNIA_SECURITY_ID,
     DATA_CUTOFF,
     IDENTITY_PATH,

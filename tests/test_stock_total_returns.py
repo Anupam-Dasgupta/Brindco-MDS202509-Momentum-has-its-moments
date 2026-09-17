@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pyarrow.dataset as ds
 
-from stock_total_returns import (
+from brindco_momentum.data.stock_total_returns import (
     ACTIONS,
     AUDIT_DIR,
     CUTOFF,

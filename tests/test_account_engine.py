@@ -2,12 +2,12 @@ from datetime import date
 
 import pytest
 
-from account_engine import (
+from brindco_momentum.execution.account_engine import (
     AccountState, affordable_buy_quantity, fill_terms, participation_cap_shares,
     recognise_bonus, recognise_dividend, rights_materiality, settle_due,
     settlement_after, target_shares,
 )
-from tax_model import Lot
+from brindco_momentum.execution.tax_model import Lot
 
 
 def test_whole_share_targets_and_capacity_use_lagged_adv():

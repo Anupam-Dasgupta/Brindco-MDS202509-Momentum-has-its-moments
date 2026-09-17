@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from tax_model import Lot, compute_year_tax, consume_fifo, fiscal_year, holding_term
+from brindco_momentum.execution.tax_model import Lot, compute_year_tax, consume_fifo, fiscal_year, holding_term
 
 
 def test_fiscal_year_and_calendar_anniversary():

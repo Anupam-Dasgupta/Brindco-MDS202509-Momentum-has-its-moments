@@ -2,7 +2,7 @@ from datetime import date
 
 import pandas as pd
 
-from development_accounts import run_account
+from brindco_momentum.execution.development_accounts import run_account
 
 
 def _run(tmp_path, exit_adv):

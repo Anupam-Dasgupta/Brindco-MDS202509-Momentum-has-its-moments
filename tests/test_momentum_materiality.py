@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import momentum_materiality as triage
-from momentum_signal import OLD_PANEL
+import brindco_momentum.signals.momentum_materiality as triage
+from brindco_momentum.signals.momentum_signal import OLD_PANEL
 
 
 @pytest.fixture(scope="module")

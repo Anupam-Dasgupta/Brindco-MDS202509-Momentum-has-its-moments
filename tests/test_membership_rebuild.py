@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from membership_rebuild import CUTOFF, ROOT, START_DATE, sha256
+from brindco_momentum.data.membership_rebuild import CUTOFF, ROOT, START_DATE, sha256
 
 
 MEMBERSHIP_DIR = ROOT / "data" / "processed" / "membership_official"

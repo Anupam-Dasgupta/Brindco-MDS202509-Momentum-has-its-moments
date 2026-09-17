@@ -3,7 +3,7 @@ from datetime import date
 import pandas as pd
 import pytest
 
-from development_accounts import ROOT, UNOMINDA_2018_BONUS
+from brindco_momentum.execution.development_accounts import ROOT, UNOMINDA_2018_BONUS
 
 
 FINAL = ROOT / "results/accounts_development/frozen_corporate_action_scenario"

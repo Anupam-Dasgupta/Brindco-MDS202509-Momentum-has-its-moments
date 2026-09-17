@@ -5,8 +5,8 @@ import pandas as pd
 import pyarrow.dataset as ds
 import pytest
 
-from event_resolution_audit import ROOT
-from stock_total_returns import (
+from brindco_momentum.data.event_resolution_audit import ROOT
+from brindco_momentum.data.stock_total_returns import (
     CUTOFF, MANUAL_RESOLUTIONS, NEW_RETURNS,
     apply_manual_resolutions, build_returns, prepare_prices,
 )

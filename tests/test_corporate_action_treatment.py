@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from corporate_action_treatment import (
+from brindco_momentum.data.corporate_action_treatment import (
     DATA_CUTOFF,
     EVIDENCE_MANIFEST,
     REQUIRED_TREATMENT_COLUMNS,

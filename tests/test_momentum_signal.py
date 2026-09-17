@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 import pyarrow.dataset as ds
 
-from momentum_signal import (
+from brindco_momentum.signals.momentum_signal import (
     AUDIT, CALENDAR, CUTOFF, DELAYED, FORMATIONS_OUTPUT, MEMBERSHIP,
     MONTHLY_OUTPUT, OLD_PANEL, PANEL, RETURNS, WINNERS_OUTPUT,
     attach_formation_observations, build_monthly, rank_winners,

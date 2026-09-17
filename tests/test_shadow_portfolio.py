@@ -3,9 +3,9 @@ import hashlib
 import numpy as np
 import pandas as pd
 
-from momentum_signal import CUTOFF, FORMATIONS_OUTPUT, MONTHLY_OUTPUT, PANEL, RETURNS, WINNERS_OUTPUT
-from shadow_portfolio import simulate_shadow
-from zero_entitlement_sensitivity import AUDIT, SENSITIVITY
+from brindco_momentum.signals.momentum_signal import CUTOFF, FORMATIONS_OUTPUT, MONTHLY_OUTPUT, PANEL, RETURNS, WINNERS_OUTPUT
+from brindco_momentum.portfolio.shadow_portfolio import simulate_shadow
+from brindco_momentum.portfolio.zero_entitlement_sensitivity import AUDIT, SENSITIVITY
 
 
 def small_shadow_inputs():

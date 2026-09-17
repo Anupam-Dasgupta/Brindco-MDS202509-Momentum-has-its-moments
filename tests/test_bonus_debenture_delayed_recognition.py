@@ -1,6 +1,6 @@
 import pandas as pd
 
-from bonus_debenture_delayed_recognition import (
+from brindco_momentum.data.bonus_debenture_delayed_recognition import (
     ACCEPTED_TREATMENT_SHA256,
     TREATMENTS,
     build_timing_audit,

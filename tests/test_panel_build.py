@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from panel_build import (
+from brindco_momentum.data.panel_build import (
     DATA_CUTOFF,
     add_reason,
     attach_returns,

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from account_preflight import CUTOFF, INPUTS, OUT, sha256
+from brindco_momentum.execution.account_preflight import CUTOFF, INPUTS, OUT, sha256
 
 
 def test_candidate_audit_exposes_dhani_right_without_invented_sale():

@@ -1,0 +1,1 @@
+"""Brindco momentum research package."""

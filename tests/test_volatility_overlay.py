@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from momentum_signal import CUTOFF, RETURNS
-from shadow_portfolio import simulate_shadow
-from volatility_overlay import (
+from brindco_momentum.signals.momentum_signal import CUTOFF, RETURNS
+from brindco_momentum.portfolio.shadow_portfolio import simulate_shadow
+from brindco_momentum.portfolio.volatility_overlay import (
     ADANIENT_DATE, ADANIENT_EVENT, ADANIENT_SECURITY, ASSUMPTION_ID, AUDIT,
     COMBINED_STATUS, HGS_BONUS, HGS_DATE, HGS_DIVIDEND, HGS_SECURITY,
     EASE_BONUS, EASE_DATE, EASE_SECURITY, EASE_SPLIT,
