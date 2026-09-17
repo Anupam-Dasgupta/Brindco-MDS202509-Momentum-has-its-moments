@@ -1,0 +1,485 @@
+symbol,valid_from,valid_to,source,source_url,notes,needs_manual_audit,referenced_document
+360ONE,2014-01-01,,snapshot_floor,,,True,
+3MINDIA,2014-01-01,,snapshot_floor,,,True,
+AARTIIND,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+ABAN,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+ABFRL,2014-01-01,,snapshot_floor,,,True,
+ABIRLANUVO,2014-01-01,2017-05-26,snapshot_floor,,closed by ind_prs27042017.pdf,True,ind_prs27042017.pdf
+ABREL,2014-01-01,,snapshot_floor,,,True,
+ACC,2014-01-01,,snapshot_floor,,,True,
+ADANIENSOL,2014-01-01,,snapshot_floor,,,True,
+ADANIENT,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+ADANIPORTS,2014-01-01,,snapshot_floor,,,True,
+ADVANTA,2014-01-01,2016-04-29,snapshot_floor,,closed by ind_prs22042016.pdf,True,ind_prs22042016.pdf
+AEGISLOG,2014-01-01,,snapshot_floor,,,True,
+AHLUCONT,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+AIAENG,2014-01-01,,snapshot_floor,,,True,
+AKZOINDIA,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+ALBK,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs16122019.pdf,True,ind_prs16122019.pdf
+ALKEM,2014-01-01,,snapshot_floor,,,True,
+ALLCARGO,2014-01-01,2020-11-02,snapshot_floor,,closed by ind_prs26102020.pdf,True,ind_prs26102020.pdf
+ALOKTEXT,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+AMBUJACEM,2014-01-01,,snapshot_floor,,,True,
+AMTEKAUTO,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+ANANTRAJ,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+ANDHRABANK,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs16122019.pdf,True,ind_prs16122019.pdf
+ANGELONE,2014-01-01,,snapshot_floor,,,True,
+ANSALAPI,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+APLAPOLLO,2014-01-01,,snapshot_floor,,,True,
+APOLLOHOSP,2014-01-01,,snapshot_floor,,,True,
+APOLLOTYRE,2014-01-01,,snapshot_floor,,,True,
+ARE&M,2014-01-01,,snapshot_floor,,,True,
+ASHOKLEY,2014-01-01,,snapshot_floor,,,True,
+ASIANPAINT,2014-01-01,,snapshot_floor,,,True,
+ASTRAZEN,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+ATUL,2014-01-01,,snapshot_floor,,,True,
+AUROPHARMA,2014-01-01,,snapshot_floor,,,True,
+AVANTIFEED,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+AXISBANK,2014-01-01,,snapshot_floor,,,True,
+BAJAJ-AUTO,2014-01-01,,snapshot_floor,,,True,
+BAJAJELEC,2014-01-01,2023-04-28,snapshot_floor,,closed by ind_prs19042023_1.pdf,True,ind_prs19042023_1.pdf
+BAJAJFINSV,2014-01-01,,snapshot_floor,,,True,
+BAJAJHIND,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+BAJAJHLDNG,2014-01-01,,snapshot_floor,,,True,
+BAJFINANCE,2014-01-01,,snapshot_floor,,,True,
+BALLARPUR,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+BALMLAWRIE,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+BALRAMCHIN,2014-01-01,,snapshot_floor,,,True,
+BANKBARODA,2014-01-01,,snapshot_floor,,,True,
+BANKINDIA,2014-01-01,,snapshot_floor,,,True,
+BASF,2014-01-01,2023-09-29,snapshot_floor,,closed by ind_prs17082023.pdf,True,ind_prs17082023.pdf
+BATAINDIA,2014-01-01,,snapshot_floor,,,True,
+BBTC,2014-01-01,,snapshot_floor,,,True,
+BEL,2014-01-01,,snapshot_floor,,,True,
+BEML,2014-01-01,2022-04-12,snapshot_floor,,closed by ind_prs05042022_1.pdf,True,ind_prs05042022_1.pdf
+BERGEPAINT,2014-01-01,,snapshot_floor,,,True,
+BFUTILITIE,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+BGRENERGY,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+BHARATFIN,2014-01-01,2018-12-28,snapshot_floor,,closed by ind_prs14122018.pdf,True,ind_prs14122018.pdf
+BHARATFORG,2014-01-01,,snapshot_floor,,,True,
+BHARTIARTL,2014-01-01,,snapshot_floor,,,True,
+BHEL,2014-01-01,,snapshot_floor,,,True,
+BHUSANSTL,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+BIOCON,2014-01-01,,snapshot_floor,,,True,
+BIRLACORPN,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+BLISSGVS,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+BLUEDART,2014-01-01,,snapshot_floor,,,True,
+BLUESTARCO,2014-01-01,,snapshot_floor,,,True,
+BOMDYEING,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+BOSCHLTD,2014-01-01,,snapshot_floor,,,True,
+BPCL,2014-01-01,,snapshot_floor,,,True,
+BRFL,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+BRIGADE,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+BRITANNIA,2014-01-01,,snapshot_floor,,,True,
+CANBK,2014-01-01,,snapshot_floor,,,True,
+CANFINHOME,2014-01-01,,snapshot_floor,,,True,
+CAPF,2014-01-01,2018-12-28,snapshot_floor,,closed by ind_prs14122018.pdf,True,ind_prs14122018.pdf
+CAPLIPOINT,2014-01-01,2023-03-31,snapshot_floor,,closed by ind_prs17022023_1.pdf,True,ind_prs17022023_1.pdf
+CARBORUNIV,2014-01-01,,snapshot_floor,,,True,
+CASTROLIND,2014-01-01,,snapshot_floor,,,True,
+CCL,2014-01-01,,snapshot_floor,,,True,
+CEATLTD,2014-01-01,,snapshot_floor,,,True,
+CENTRALBK,2014-01-01,,snapshot_floor,,,True,
+CENTURYTEX,2014-01-01,2018-12-28,snapshot_floor,,closed by ind_prs14122018.pdf,True,ind_prs14122018.pdf
+CERA,2014-01-01,2026-03-30,snapshot_floor,,closed by ind_prs23022026.pdf,True,ind_prs23022026.pdf
+CESC,2014-01-01,2018-02-05,snapshot_floor,,closed by ind_prs08012018.pdf,True,ind_prs08012018.pdf
+CGPOWER,2014-01-01,2019-12-26,snapshot_floor,,closed by ind_prs18122019.pdf,True,ind_prs18122019.pdf
+CHAMBLFERT,2014-01-01,,snapshot_floor,,,True,
+CHENNPETRO,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+CHOLAFIN,2014-01-01,,snapshot_floor,,,True,
+CHOLAHLDNG,2014-01-01,,snapshot_floor,,,True,
+CIEINDIA,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+CIPLA,2014-01-01,,snapshot_floor,,,True,
+COALINDIA,2014-01-01,,snapshot_floor,,,True,
+COFFEEDAY,2014-01-01,2019-12-26,snapshot_floor,,closed by ind_prs18122019.pdf,True,ind_prs18122019.pdf
+COFORGE,2014-01-01,,snapshot_floor,,,True,
+COHANCE,2014-01-01,,snapshot_floor,,,True,
+COLPAL,2014-01-01,,snapshot_floor,,,True,
+CONCOR,2014-01-01,,snapshot_floor,,,True,
+COROMANDEL,2014-01-01,,snapshot_floor,,,True,
+CORPBANK,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+COX&KINGS,2014-01-01,2018-06-29,snapshot_floor,,closed by ind_prs24052018.pdf,True,ind_prs24052018.pdf
+CRISIL,2014-01-01,,snapshot_floor,,,True,
+CROMPGREAV,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs24082015.pdf,True,ind_prs24082015.pdf
+CROMPTON,2014-01-01,,snapshot_floor,,,True,
+CUB,2014-01-01,,snapshot_floor,,,True,
+CUMMINSIND,2014-01-01,,snapshot_floor,,,True,
+CYIENT,2014-01-01,,snapshot_floor,,,True,
+DABUR,2014-01-01,,snapshot_floor,,,True,
+DALBHARAT,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+DBCORP,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+DBREALTY,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+DCBBANK,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+DCMSHRIRAM,2014-01-01,2024-09-30,snapshot_floor,,closed by ind_prs23082024.pdf,True,ind_prs23082024.pdf
+DEEPAKFERT,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+DELTACORP,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+DEN,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+DENABANK,2014-01-01,2019-01-28,snapshot_floor,,closed by ind_prs21012019.pdf,True,ind_prs21012019.pdf
+DHANUKA,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+DHFL,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+DISHMAN,2014-01-01,2017-01-23,snapshot_floor,,closed by ind_prs16012017.pdf,True,ind_prs16012017.pdf
+DISHTV,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+DIVISLAB,2014-01-01,,snapshot_floor,,,True,
+DLF,2014-01-01,,snapshot_floor,,,True,
+DREDGECORP,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+DRREDDY,2014-01-01,,snapshot_floor,,,True,
+DYNAMATECH,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+ECLERX,2014-01-01,,snapshot_floor,,,True,
+EDELWEISS,2014-01-01,2023-04-28,snapshot_floor,,closed by ind_prs19042023_1.pdf,True,ind_prs19042023_1.pdf
+EICHERMOT,2014-01-01,,snapshot_floor,,,True,
+EIDPARRY,2014-01-01,,snapshot_floor,,,True,
+EIHOTEL,2014-01-01,,snapshot_floor,,,True,
+EMAMILTD,2014-01-01,,snapshot_floor,,,True,
+ENGINERSIN,2014-01-01,,snapshot_floor,,,True,
+EPIGRAL,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+EPL,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+EQUITAS,2014-01-01,2022-09-30,snapshot_floor,,closed by ind_prs16092022.pdf,True,ind_prs16092022.pdf
+EROSMEDIA,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+ESCORTS,2014-01-01,,snapshot_floor,,,True,
+EXIDEIND,2014-01-01,,snapshot_floor,,,True,
+FDC,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+FEDERALBNK,2014-01-01,,snapshot_floor,,,True,
+FINCABLES,2014-01-01,,snapshot_floor,,,True,
+FINPIPE,2014-01-01,2026-03-30,snapshot_floor,,closed by ind_prs23022026.pdf,True,ind_prs23022026.pdf
+FORTIS,2014-01-01,2018-02-05,snapshot_floor,,closed by ind_prs08012018.pdf,True,ind_prs08012018.pdf
+FRL,2014-01-01,2015-12-14,snapshot_floor,,closed by ind_prs07122015.pdf,True,ind_prs07122015.pdf
+FSL,2014-01-01,,snapshot_floor,,,True,
+GAIL,2014-01-01,,snapshot_floor,,,True,
+GAMMONIND,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+GATI,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+GDL,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+GEPIL,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+GESHIP,2014-01-01,,snapshot_floor,,,True,
+GET&D,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+GILLETTE,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+GLAXO,2014-01-01,,snapshot_floor,,,True,
+GLENMARK,2014-01-01,,snapshot_floor,,,True,
+GMDCLTD,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+GMRAIRPORT,2014-01-01,2021-10-29,snapshot_floor,,closed by ind_prs22102021.pdf,True,ind_prs22102021.pdf
+GODFRYPHLP,2014-01-01,,snapshot_floor,,,True,
+GODREJCP,2014-01-01,,snapshot_floor,,,True,
+GODREJIND,2014-01-01,,snapshot_floor,,,True,
+GODREJPROP,2014-01-01,,snapshot_floor,,,True,
+GPPL,2014-01-01,2025-09-30,snapshot_floor,,closed by ind_prs22082025.pdf,True,ind_prs22082025.pdf
+GRANULES,2014-01-01,,snapshot_floor,,,True,
+GRASIM,2014-01-01,2017-05-26,snapshot_floor,,closed by ind_prs27042017.pdf,True,ind_prs27042017.pdf
+GREAVESCOT,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+GREENPLY,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+GRINDWELL,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+GSFC,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+GSPL,2014-01-01,2026-05-12,snapshot_floor,,closed by ind_prs04052026.pdf,True,ind_prs04052026.pdf
+GUJFLUORO,2014-01-01,2019-06-28,snapshot_floor,,closed by ind_prs13062019.pdf,True,ind_prs13062019.pdf
+GUJGASLTD,2014-01-01,2026-03-30,snapshot_floor,,closed by ind_prs23022026.pdf,True,ind_prs23022026.pdf
+GUJNRECOKE,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+GVKPIL,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+GVT&D,2014-01-01,,snapshot_floor,,,True,
+HATHWAY,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs19122019.pdf,True,ind_prs19122019.pdf
+HAVELLS,2014-01-01,,snapshot_floor,,,True,
+HBLENGINE,2014-01-01,,snapshot_floor,,,True,
+HCC,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+HCL-INSYS,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+HCLTECH,2014-01-01,,snapshot_floor,,,True,
+HDFC,2014-01-01,2023-07-13,snapshot_floor,,closed by ind_prs04072023.pdf,True,ind_prs04072023.pdf
+HDFCBANK,2014-01-01,,snapshot_floor,,,True,
+HDIL,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+HEIDELBERG,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+HEROMOTOCO,2014-01-01,,snapshot_floor,,,True,
+HFCL,2014-01-01,,snapshot_floor,,,True,
+HIMATSEIDE,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+HINDALCO,2014-01-01,,snapshot_floor,,,True,
+HINDCOPPER,2014-01-01,,snapshot_floor,,,True,
+HINDOILEXP,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+HINDPETRO,2014-01-01,,snapshot_floor,,,True,
+HINDUNILVR,2014-01-01,,snapshot_floor,,,True,
+HINDZINC,2014-01-01,,snapshot_floor,,,True,
+HMVL,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+HONAUT,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+HOTELEELA,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+HSIL,2014-01-01,2018-12-28,snapshot_floor,,closed by ind_prs14122018.pdf,True,ind_prs14122018.pdf
+HTMEDIA,2014-01-01,2018-06-29,snapshot_floor,,closed by ind_prs20062018.pdf,True,ind_prs20062018.pdf
+HUHTAMAKI,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+IBREALEST,2014-01-01,2023-09-29,snapshot_floor,,closed by ind_prs17082023.pdf,True,ind_prs17082023.pdf
+ICICIBANK,2014-01-01,,snapshot_floor,,,True,
+ICIL,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+ICRA,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+IDBI,2014-01-01,,snapshot_floor,,,True,
+IDEA,2014-01-01,2024-09-30,snapshot_floor,,closed by ind_prs23082024.pdf,True,ind_prs23082024.pdf
+IDFC,2014-01-01,2024-10-10,snapshot_floor,,closed by ind_prs04102024.pdf,True,ind_prs04102024.pdf
+IDFCFIRSTB,2014-01-01,,snapshot_floor,,,True,
+IFCI,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+IGARASHI,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+IGL,2014-01-01,,snapshot_floor,,,True,
+IIFL,2014-01-01,2017-06-23,snapshot_floor,,closed by ind_prs15062017.pdf,True,ind_prs15062017.pdf
+IL&FSTRANS,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+INDHOTEL,2014-01-01,,snapshot_floor,,,True,
+INDIACEM,2014-01-01,,snapshot_floor,,,True,
+INDIANB,2014-01-01,,snapshot_floor,,,True,
+INDIGO,2014-01-01,,snapshot_floor,,,True,
+INDOCO,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+INDUSINDBK,2014-01-01,,snapshot_floor,,,True,
+INDUSTOWER,2014-01-01,,snapshot_floor,,,True,
+INFIBEAM,2014-01-01,2020-11-25,snapshot_floor,,closed by ind_prs18112020.pdf,True,ind_prs18112020.pdf
+INFY,2014-01-01,,snapshot_floor,,,True,
+INGERRAND,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+INTELLECT,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+IOB,2014-01-01,,snapshot_floor,,,True,
+IOC,2014-01-01,,snapshot_floor,,,True,
+IPAPPM,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+IPCALAB,2014-01-01,,snapshot_floor,,,True,
+IRB,2014-01-01,,snapshot_floor,,,True,
+ITC,2014-01-01,,snapshot_floor,,,True,
+ITDCEM,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+J&KBANK,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+JAGRAN,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+JAICORPLTD,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+JBCHEPHARM,2014-01-01,,snapshot_floor,,,True,
+JBFIND,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+JCHAC,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+JETAIRWAYS,2014-01-01,2019-09-24,snapshot_floor,,closed by ind_prs17092019_1.pdf,True,ind_prs17092019_1.pdf
+JINDALPOLY,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+JINDALSAW,2014-01-01,2016-04-29,snapshot_floor,,closed by ind_prs22042016.pdf,True,ind_prs22042016.pdf
+JINDALSTEL,2014-01-01,,snapshot_floor,,,True,
+JISLJALEQS,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+JKIL,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+JKLAKSHMI,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+JKTYRE,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+JMFINANCIL,2014-01-01,,snapshot_floor,,,True,
+JMTAUTOLTD,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+JPASSOCIAT,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+JPINFRATEC,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+JPPOWER,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+JSWDULUX,2014-01-01,,snapshot_floor,,,True,
+JSWENERGY,2014-01-01,,snapshot_floor,,,True,
+JSWHL,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+JSWSTEEL,2014-01-01,,snapshot_floor,,,True,
+JUBLFOOD,2014-01-01,,snapshot_floor,,,True,
+KAJARIACER,2014-01-01,,snapshot_floor,,,True,
+KANSAINER,2014-01-01,2025-09-30,snapshot_floor,,closed by ind_prs22082025.pdf,True,ind_prs22082025.pdf
+KARURVYSYA,2014-01-01,,snapshot_floor,,,True,
+KEC,2014-01-01,,snapshot_floor,,,True,
+KESORAMIND,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+KOLTEPATIL,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+KOTAKBANK,2014-01-01,,snapshot_floor,,,True,
+KPIL,2014-01-01,,snapshot_floor,,,True,
+KPIT,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs31082018.pdf,True,ind_prs31082018.pdf
+KSBPUMPS,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+KSCL,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+KTKBANK,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+KWALITY,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+LAKSHVILAS,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+LALPATHLAB,2014-01-01,,snapshot_floor,,,True,
+LAOPALA,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+LAXMIMACH,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+LICHSGFIN,2014-01-01,,snapshot_floor,,,True,
+LINDEINDIA,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+LITL,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+LT,2014-01-01,,snapshot_floor,,,True,
+LTF,2014-01-01,,snapshot_floor,,,True,
+LUPIN,2014-01-01,,snapshot_floor,,,True,
+M&M,2014-01-01,,snapshot_floor,,,True,
+M&MFIN,2014-01-01,,snapshot_floor,,,True,
+MAGMA,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+MAHINDCIE,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+MAHLIFE,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+MANAPPURAM,2014-01-01,,snapshot_floor,,,True,
+MANDHANA,2014-01-01,2015-12-14,snapshot_floor,,closed by ind_prs07122015.pdf,True,ind_prs07122015.pdf
+MANGCHEFER,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+MANPASAND,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+MARICO,2014-01-01,,snapshot_floor,,,True,
+MARUTI,2014-01-01,,snapshot_floor,,,True,
+MAX,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs24082015.pdf,True,ind_prs24082015.pdf
+MCLEODRUSS,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+MFSL,2014-01-01,2017-01-23,snapshot_floor,,closed by ind_prs16012017.pdf,True,ind_prs16012017.pdf
+MHRIL,2014-01-01,2024-09-30,snapshot_floor,,closed by ind_prs23082024.pdf,True,ind_prs23082024.pdf
+MMTC,2014-01-01,,snapshot_floor,,,True,
+MOIL,2014-01-01,2023-03-31,snapshot_floor,,closed by ind_prs17022023_1.pdf,True,ind_prs17022023_1.pdf
+MONNETISPA,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+MONSANTO,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+MOTHERSON,2014-01-01,2021-06-30,snapshot_floor,,closed by ind_prs15062021.pdf,True,ind_prs15062021.pdf
+MOTILALOFS,2014-01-01,,snapshot_floor,,,True,
+MPHASIS,2014-01-01,,snapshot_floor,,,True,
+MRF,2014-01-01,,snapshot_floor,,,True,
+MRPL,2014-01-01,,snapshot_floor,,,True,
+MTNL,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+MUTHOOTFIN,2014-01-01,,snapshot_floor,,,True,
+NATCOPHARM,2014-01-01,,snapshot_floor,,,True,
+NATIONALUM,2014-01-01,,snapshot_floor,,,True,
+NAUKRI,2014-01-01,,snapshot_floor,,,True,
+NAVINFLUOR,2014-01-01,,snapshot_floor,,,True,
+NAVKARCORP,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+NCC,2014-01-01,,snapshot_floor,,,True,
+NETWORK18,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+NH,2014-01-01,,snapshot_floor,,,True,
+NHPC,2014-01-01,,snapshot_floor,,,True,
+NILKAMAL,2014-01-01,2022-03-31,snapshot_floor,,closed by ind_prs24022022_1.pdf,True,ind_prs24022022_1.pdf
+NLCINDIA,2014-01-01,,snapshot_floor,,,True,
+NMDC,2014-01-01,2022-08-08,snapshot_floor,,closed by ind_prs11072022.pdf,True,ind_prs11072022.pdf
+NTPC,2014-01-01,,snapshot_floor,,,True,
+OBEROIRLTY,2014-01-01,,snapshot_floor,,,True,
+OCL,2014-01-01,2017-01-23,snapshot_floor,,closed by ind_prs16012017.pdf,True,ind_prs16012017.pdf
+OFSS,2014-01-01,,snapshot_floor,,,True,
+OIL,2014-01-01,,snapshot_floor,,,True,
+OMAXE,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+ONGC,2014-01-01,,snapshot_floor,,,True,
+ORCHIDCHEM,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+ORIENTBANK,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs16122019.pdf,True,ind_prs16122019.pdf
+ORISSAMINE,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+PAGEIND,2014-01-01,,snapshot_floor,,,True,
+PCBL,2014-01-01,,snapshot_floor,,,True,
+PCJEWELLER,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+PEL,2014-01-01,2022-08-08,snapshot_floor,,closed by ind_prs11072022.pdf,True,ind_prs11072022.pdf
+PERSISTENT,2014-01-01,,snapshot_floor,,,True,
+PETRONET,2014-01-01,,snapshot_floor,,,True,
+PFC,2014-01-01,,snapshot_floor,,,True,
+PFIZER,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+PGHH,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+PGHL,2014-01-01,2023-03-31,snapshot_floor,,closed by ind_prs17022023_1.pdf,True,ind_prs17022023_1.pdf
+PHOENIXLTD,2014-01-01,,snapshot_floor,,,True,
+PIDILITIND,2014-01-01,,snapshot_floor,,,True,
+PNB,2014-01-01,,snapshot_floor,,,True,
+POLARIS,2014-01-01,2018-02-05,snapshot_floor,,closed by ind_prs08012018.pdf,True,ind_prs08012018.pdf
+POWERGRID,2014-01-01,,snapshot_floor,,,True,
+PRAJIND,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+PRESTIGE,2014-01-01,,snapshot_floor,,,True,
+PTC,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+PUNJLLOYD,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+RADICO,2014-01-01,,snapshot_floor,,,True,
+RAIN,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+RAJESHEXPO,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+RALLIS,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+RAMCOCEM,2014-01-01,,snapshot_floor,,,True,
+RAMCOIND,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+RAMCOSYS,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+RASOYPR,2014-01-01,2015-09-28,snapshot_floor,,closed by ind_prs12082015.pdf,True,ind_prs12082015.pdf
+RAYMOND,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+RCF,2014-01-01,2026-03-30,snapshot_floor,,closed by ind_prs23022026.pdf,True,ind_prs23022026.pdf
+RCOM,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+RECLTD,2014-01-01,,snapshot_floor,,,True,
+REDINGTON,2014-01-01,,snapshot_floor,,,True,
+RELAXO,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+RELIANCE,2014-01-01,,snapshot_floor,,,True,
+RELIGARE,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+RELINFRA,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+RENUKA,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+RHIM,2014-01-01,,snapshot_floor,,,True,
+RIIL,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+RKFORGE,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+RNAVAL,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+ROLTA,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+RPOWER,2014-01-01,2020-06-26,snapshot_floor,,closed by ind_prs10062020.pdf,True,ind_prs10062020.pdf
+RTNPOWER,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+RUCHISOYA,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+SADBHAV,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+SAIL,2014-01-01,,snapshot_floor,,,True,
+SANOFI,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+SBIN,2014-01-01,,snapshot_floor,,,True,
+SCHAEFFLER,2014-01-01,,snapshot_floor,,,True,
+SCI,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+SEQUENT,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SFCL,2014-01-01,2017-01-23,snapshot_floor,,closed by ind_prs16012017.pdf,True,ind_prs16012017.pdf
+SGPC,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs23082021.pdf,True,ind_prs23082021.pdf
+SHARDACROP,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+SHILPAMED,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+SHOPERSTOP,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SHREECEM,2014-01-01,,snapshot_floor,,,True,
+SHRIRAMCIT,2014-01-01,2022-08-08,snapshot_floor,,closed by ind_prs11072022.pdf,True,ind_prs11072022.pdf
+SHRIRAMFIN,2014-01-01,,snapshot_floor,,,True,
+SHTV,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs23082021.pdf,True,ind_prs23082021.pdf
+SIEMENS,2014-01-01,,snapshot_floor,,,True,
+SIMPLEXINF,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SINTEX,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SITINET,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SJVN,2014-01-01,,snapshot_floor,,,True,
+SKFINDIA,2014-01-01,2025-12-31,snapshot_floor,,closed by ind_prs11122025.pdf,True,ind_prs11122025.pdf
+SMLISUZU,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+SNOWMAN,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+SOBHA,2014-01-01,,snapshot_floor,,,True,
+SOLARINDS,2014-01-01,,snapshot_floor,,,True,
+SOMANYCERA,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+SONATSOFTW,2014-01-01,,snapshot_floor,,,True,
+SOUTHBANK,2014-01-01,2021-03-31,snapshot_floor,,closed by ind_prs23022021.pdf,True,ind_prs23022021.pdf
+SREINFRA,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+SRF,2014-01-01,,snapshot_floor,,,True,
+STAR,2014-01-01,2018-02-05,snapshot_floor,,closed by ind_prs08012018.pdf,True,ind_prs08012018.pdf
+STCINDIA,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+STLTECH,2014-01-01,2024-09-30,snapshot_floor,,closed by ind_prs23082024.pdf,True,ind_prs23082024.pdf
+STRTECH,2014-01-01,2016-01-18,snapshot_floor,,closed by ind_prs11012016.pdf,True,ind_prs11012016.pdf
+SUNDARMFIN,2014-01-01,2017-11-13,snapshot_floor,,closed by ind_prs03112017.pdf,True,ind_prs03112017.pdf
+SUNDRMFAST,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+SUNPHARMA,2014-01-01,,snapshot_floor,,,True,
+SUNTECK,2014-01-01,2024-09-30,snapshot_floor,,closed by ind_prs23082024.pdf,True,ind_prs23082024.pdf
+SUNTV,2014-01-01,,snapshot_floor,,,True,
+SUPRAJIT,2014-01-01,2017-03-31,snapshot_floor,,closed by ind_prs16022017.pdf,True,ind_prs16022017.pdf
+SUPREMEIND,2014-01-01,,snapshot_floor,,,True,
+SUZLON,2014-01-01,,snapshot_floor,,,True,
+SWANCORP,2014-01-01,,snapshot_floor,,,True,
+SWANENERGY,2014-01-01,2021-09-30,snapshot_floor,,closed by ind_prs15092021.pdf,True,ind_prs15092021.pdf
+SYNDIBANK,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs16122019.pdf,True,ind_prs16122019.pdf
+SYNGENE,2014-01-01,,snapshot_floor,,,True,
+TAKE,2014-01-01,2020-09-25,snapshot_floor,,closed by ind_prs20082020.pdf,True,ind_prs20082020.pdf
+TATACHEM,2014-01-01,2019-12-27,snapshot_floor,,closed by ind_prs16122019.pdf,True,ind_prs16122019.pdf
+TATACOFFEE,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+TATACOMM,2014-01-01,2018-06-29,snapshot_floor,,closed by ind_prs24052018.pdf,True,ind_prs24052018.pdf
+TATACONSUM,2014-01-01,,snapshot_floor,,,True,
+TATAELXSI,2014-01-01,,snapshot_floor,,,True,
+TATAPOWER,2014-01-01,,snapshot_floor,,,True,
+TATASPONGE,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+TATASTEEL,2014-01-01,,snapshot_floor,,,True,
+TCI,2014-01-01,2016-04-29,snapshot_floor,,closed by ind_prs22042016.pdf,True,ind_prs22042016.pdf
+TCS,2014-01-01,,snapshot_floor,,,True,
+TECHM,2014-01-01,,snapshot_floor,,,True,
+TECHNO,2014-01-01,2018-08-08,snapshot_floor,,closed by ind_prs01082018.pdf,True,ind_prs01082018.pdf
+TEXRAIL,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+THERMAX,2014-01-01,,snapshot_floor,,,True,
+THOMASCOOK,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs17092019.pdf,True,ind_prs17092019.pdf
+TIDEWATER,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+TIMKEN,2014-01-01,,snapshot_floor,,,True,
+TITAN,2014-01-01,,snapshot_floor,,,True,
+TMPV,2014-01-01,,snapshot_floor,,,True,
+TNPL,2014-01-01,2019-09-27,snapshot_floor,,closed by ind_prs28082019.pdf,True,ind_prs28082019.pdf
+TORNTPHARM,2014-01-01,,snapshot_floor,,,True,
+TORNTPOWER,2014-01-01,,snapshot_floor,,,True,
+TRENT,2014-01-01,,snapshot_floor,,,True,
+TRITURBINE,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+TTKPRESTIG,2014-01-01,2024-03-28,snapshot_floor,,closed by ind_prs28022024.pdf,True,ind_prs28022024.pdf
+TUBEINVEST,2014-01-01,2017-05-26,snapshot_floor,,closed by ind_prs27042017.pdf,True,ind_prs27042017.pdf
+TV18BRDCST,2014-01-01,2024-10-16,snapshot_floor,,closed by ind_prs10102024.pdf,True,ind_prs10102024.pdf
+TVSMOTOR,2014-01-01,,snapshot_floor,,,True,
+TVSSRICHAK,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+UBL,2014-01-01,,snapshot_floor,,,True,
+UCOBANK,2014-01-01,2022-09-30,snapshot_floor,,closed by ind_prs01092022.pdf,True,ind_prs01092022.pdf
+UFLEX,2014-01-01,2023-09-29,snapshot_floor,,closed by ind_prs17082023.pdf,True,ind_prs17082023.pdf
+ULTRACEMCO,2014-01-01,,snapshot_floor,,,True,
+UNICHEMLAB,2014-01-01,2019-03-29,snapshot_floor,,closed by ind_prs25022019.pdf,True,ind_prs25022019.pdf
+UNIONBANK,2014-01-01,,snapshot_floor,,,True,
+UNITDSPR,2014-01-01,,snapshot_floor,,,True,
+UNITECH,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+UPL,2014-01-01,,snapshot_floor,,,True,
+VAKRANGEE,2014-01-01,2022-09-30,snapshot_floor,,closed by ind_prs01092022.pdf,True,ind_prs01092022.pdf
+VEDL,2014-01-01,2020-07-31,snapshot_floor,,closed by ind_prs02072020_1.pdf,True,ind_prs02072020_1.pdf
+VGUARD,2014-01-01,2026-03-30,snapshot_floor,,closed by ind_prs23022026.pdf,True,ind_prs23022026.pdf
+VIJAYABANK,2014-01-01,2019-01-28,snapshot_floor,,closed by ind_prs21012019.pdf,True,ind_prs21012019.pdf
+VIPIND,2014-01-01,2025-03-28,snapshot_floor,,closed by ind_prs21022025.pdf,True,ind_prs21022025.pdf
+VOLTAS,2014-01-01,,snapshot_floor,,,True,
+VSTIND,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+VTL,2014-01-01,,snapshot_floor,,,True,
+WELSPUNLIV,2014-01-01,,snapshot_floor,,,True,
+WHIRLPOOL,2014-01-01,,snapshot_floor,,,True,
+WIPRO,2014-01-01,,snapshot_floor,,,True,
+WOCKPHARMA,2014-01-01,2023-03-31,snapshot_floor,,closed by ind_prs17022023_1.pdf,True,ind_prs17022023_1.pdf
+WONDERLA,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+YESBANK,2014-01-01,2020-03-19,snapshot_floor,,closed by ind_prs16032020.pdf,True,ind_prs16032020.pdf
+ZEEL,2014-01-01,,snapshot_floor,,,True,
+ZEELEARN,2014-01-01,2018-09-28,snapshot_floor,,closed by ind_prs28082018.pdf,True,ind_prs28082018.pdf
+ZENSARTECH,2014-01-01,2018-04-02,snapshot_floor,,closed by ind_prs21022018.pdf,True,ind_prs21022018.pdf
+ZFCVINDIA,2014-01-01,,snapshot_floor,,,True,
+ZYDUSLIFE,2014-01-01,,snapshot_floor,,,True,
+ZYDUSWELL,2014-01-01,2017-09-29,snapshot_floor,,closed by ind_prs28082017.pdf,True,ind_prs28082017.pdf
+ADLABS,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs24082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+CAMLINFINE,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+IL&FSENGG,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+METALFORGE,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+RICOAUTO,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+SITICABLE,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+SRIPIPES,2015-09-28,2015-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs12082015.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,
+STRTECH,2017-03-31,2017-09-30,press_release,https://niftyindices.com/Press_Release/ind_prs16022017.pdf,"inferred-exclude: not in NSE current snapshot, no PR found (closed at next semi-annual review)",True,

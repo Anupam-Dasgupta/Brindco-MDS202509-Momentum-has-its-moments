@@ -1,0 +1,16 @@
+measure,value
+monthly_feature_rows,106395
+official_formation_rows,51583
+formation_dates,103
+scored_formations,96
+warmup_formations,7
+eligible_rows,50397
+winner_rows,5085
+scored_winner_rows,4736
+delayed_monthly_features,2
+britannia_timing_exclusions,8
+unresolved_event_audit_rows,1390
+unresolved_independent_signal_blockers,169
+material_unresolved_events,31
+max_value_date_read,2023-03-31
+max_formation_date,2023-02-28

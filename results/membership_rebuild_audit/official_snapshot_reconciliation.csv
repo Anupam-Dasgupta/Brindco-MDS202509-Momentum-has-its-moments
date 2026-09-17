@@ -1,0 +1,10 @@
+as_of_date,snapshot_count,mapped_snapshot_count,reconstructed_count,unresolved_snapshot_symbols,symmetric_difference_count,source_file
+2014-08-28,500,500,500,0,0,cnx500_Aug2014.pdf
+2014-09-30,500,500,500,0,0,cnx500_Sep2014.pdf
+2015-09-30,500,500,500,0,0,cnx500_Sep2015.pdf
+2015-10-30,500,500,500,0,0,nifty500_Oct2015.pdf
+2020-09-30,501,501,501,0,0,NIFTY_500_Sep2020.pdf
+2020-10-30,501,501,501,0,0,NIFTY_500_Oct2020.pdf
+2021-03-31,501,501,501,0,0,NIFTY_500_Mar2021.pdf
+2021-09-30,501,501,501,0,0,NIFTY_500_Sep2021.pdf
+2022-03-31,501,501,501,0,0,NIFTY_500_Mar2022.pdf

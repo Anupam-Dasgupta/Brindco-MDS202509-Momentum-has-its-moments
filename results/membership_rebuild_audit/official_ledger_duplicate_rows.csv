@@ -1,0 +1,5 @@
+effective_date,action,company_name,company_name_normalized,symbol,source_file,source_url,publication_date,match_method
+2017-09-05,EXCLUDE,Reliance Capital Ltd.,RELIANCECAPITAL,RELCAPITAL,ind_prs29082017.pdf,https://niftyindices.com/Press_Release/ind_prs29082017.pdf,2017-08-29,OFFICIAL_DATE_NAME
+2017-09-05,EXCLUDE,Reliance Capital Ltd.,RELIANCECAPITAL,RELCAPITAL,ind_prs29082017.pdf,https://niftyindices.com/Press_Release/ind_prs29082017.pdf,2017-08-29,OFFICIAL_DATE_NAME
+2017-09-05,INCLUDE,Max Financial Services Ltd.,MAXFINANCIALSERVICES,MFSL,ind_prs29082017.pdf,https://niftyindices.com/Press_Release/ind_prs29082017.pdf,2017-08-29,OFFICIAL_DATE_NAME
+2017-09-05,INCLUDE,Max Financial Services Ltd.,MAXFINANCIALSERVICES,MFSL,ind_prs29082017.pdf,https://niftyindices.com/Press_Release/ind_prs29082017.pdf,2017-08-29,OFFICIAL_DATE_NAME

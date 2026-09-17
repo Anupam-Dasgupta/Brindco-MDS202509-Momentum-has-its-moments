@@ -1,0 +1,5 @@
+index_name,symbol,previous_valid_from,previous_valid_to,current_valid_from,current_valid_to
+Nifty 500,GSPL,2014-01-01,2026-05-12,2026-03-31,
+Nifty Smallcap 250,GSPL,2023-03-31,2026-05-12,2026-03-31,
+Nifty Energy,GSPL,2014-01-01,2026-05-12,2026-03-31,
+Nifty Oil & Gas,GSPL,2021-07-12,2026-05-12,2026-03-31,
