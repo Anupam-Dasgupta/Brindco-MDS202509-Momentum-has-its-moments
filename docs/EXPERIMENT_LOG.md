@@ -31,3 +31,21 @@ Before any account-performance or holdout inspection, extend the separate modell
 The earlier candidate preflight blocked an account run because payment/credit dates were missing and DHANI was a possible selected holding. The user clarified the frozen plan's account convention: known dividends are unspendable receivables, known bonus ratios are undeliverable economic claims until availability is evidenced, and a complex right blocks only an actually held account if wealth remains undefined. This correction was made before a complete account result or any holdout result was inspected.
 
 Nine official NSE Clearing annual capital-market holiday notices plus two amendments establish the separate T+2 settlement-business-day calendar through 2023-03-31. The source list, hashes and dates are in `audits/SETTLEMENT_CALENDAR_AUDIT.md`. Development MOM and VM account paths started on 2015-04-01 and each have 709 valid NAV rows ending 2018-02-08. Both actually held DHANI on the 2018-02-09 rights ex-date (1,154 and 642 shares respectively). Its accepted theoretical signal value is not account cash or an evidenced account right valuation. Both paths stop before event-day NAV; neither reaches the development cutoff. The partial ledger's opening-day cash/stock/NAV components and exact blocker quantities were inspected for reconciliation; no complete account comparison, holdout output, or post-cutoff market value was inspected. No signal, winners, shadow, panel, or accepted corporate-action research artifact was changed. Further work must address this held account claim explicitly rather than silently zeroing or cashing out the right.
+
+## 2026-09-18 — Frozen development evaluation
+
+The completed MOM, VM, FIX, and FIXVOL development account paths, the frozen
+gross-reference inputs, and the NIFTY 500 TRI through 2023-03-31 were opened
+for the first comparative evaluation. Outputs are in
+`../results/evaluation_development/`. No holdout value or performance was read,
+and no strategy, allocation, cost, tax, corporate-action, or execution rule was
+changed after viewing results. The summary shows VM's after-tax CAGR and Sharpe
+below MOM, FIX, and FIXVOL while its realised volatility is below MOM's; these
+are descriptive in-sample findings, not a rule-selection decision.
+
+The frozen ledgers do not contain contemporaneous open-marked pre-trade NAV.
+The evaluation therefore labels its recurring turnover denominator as the
+previous recorded close NAV and keeps that limitation visible. Cost and tax
+drag use matched cash-flow reversals on the same executed share paths;
+zero-friction reference wealth remains a separate view. The FIX/FIXVOL
+development comparisons are in-sample by construction.

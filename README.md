@@ -39,11 +39,15 @@ structural refactor:
 .venv\Scripts\python.exe scripts/portfolio/build_shadow.py
 .venv\Scripts\python.exe scripts/portfolio/build_volatility_overlay.py
 .venv\Scripts\python.exe scripts/execution/run_frozen_corporate_action_accounts.py
+.venv\Scripts\python.exe scripts/execution/run_control_accounts.py
+.venv\Scripts\python.exe scripts/evaluation/run_development_evaluation.py
 ```
 
-The final command writes to the frozen account output directory. For a
-non-destructive development replay, call the same account runner with a
-separate output directory:
+The frozen-account command writes to the frozen account output directory.
+The control command writes FIX and FIXVOL under
+`results/controls_development/`. The evaluation command writes development-only
+tables and figures under `results/evaluation_development/`. For a non-destructive development replay
+of MOM and VM, call the same account runner with a separate output directory:
 
 ```powershell
 .venv\Scripts\python.exe -c "from brindco_momentum.execution.development_accounts import ROOT, main; main(ROOT / 'results/project_refactor/reproduced_accounts', 'FROZEN_CORPORATE_ACTION_FRAMEWORK', True, True)"

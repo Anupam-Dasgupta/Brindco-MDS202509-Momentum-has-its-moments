@@ -1,0 +1,15 @@
+{
+  "account": "FIXVOL",
+  "allocation": 0.6295363230783175,
+  "numerator_daily_sd": 0.008632095091121457,
+  "denominator_daily_sd": 0.013711830079815078,
+  "uncapped_ratio": 0.6295363230783175,
+  "development_start": "2015-04-01",
+  "development_end": "2023-03-31",
+  "vm_targets": "data/processed/volatility_overlay_development.parquet:exposure",
+  "mom_shadow": "data/processed/primary_modelling_shadow_daily_returns.parquet:shadow_daily_return",
+  "vm_gross_reference": "../vm_gross_reference_daily_returns.parquet:vm_gross_reference_daily_return",
+  "reference_convention": "monthly VM target times daily MOM modelling-shadow return; zero-return cash",
+  "rebalance_day_convention": "holding-month target applies to the whole daily shadow return",
+  "standard_deviation_ddof": 1
+}
