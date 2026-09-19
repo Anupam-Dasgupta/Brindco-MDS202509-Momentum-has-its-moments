@@ -6,6 +6,13 @@ The original paper scales a long-short momentum portfolio down when momentum vol
 
 The answer is mixed. Volatility management reduced holdout volatility and drawdown, but unscaled momentum delivered the strongest growth and Sharpe ratio. Fixed-exposure controls also outperformed the dynamically scaled strategy, so lower average equity exposure explains part of VM's defensive behavior.
 
+## Strategy variants
+
+- **MOM** is the unscaled long-only momentum strategy: each month it holds the top-decile NIFTY 500 winners, equally weighted.
+- **VM** applies the Barroso-Santa-Clara volatility overlay to MOM, scaling equity exposure toward a 12% annualized volatility target using the trailing 126-session RMS volatility of the unscaled shadow momentum portfolio.
+- **FIX** is a fixed-equity control with constant equity exposure chosen to match VM's average development-period target exposure.
+- **FIXVOL** is a second fixed control calibrated on development data to match VM's overall volatility as closely as possible without dynamic timing.
+
 ## Paper and strategy translation
 
 **Selected paper:** Barroso, P. and Santa-Clara, P. (2015), *Momentum Has Its Moments*, Journal of Financial Economics 116(1), 111-120.
