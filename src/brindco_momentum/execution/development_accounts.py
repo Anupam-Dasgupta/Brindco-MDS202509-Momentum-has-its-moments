@@ -16,12 +16,16 @@ from brindco_momentum.execution.account_engine import (
     recognise_bonus, recognise_dividend, rights_materiality, settle_due,
     settlement_after, target_shares,
 )
-from brindco_momentum.data.settlement_calendar import CUTOFF, ROOT, START, build_calendar
+from brindco_momentum.execution.hard_stops import held_hard_stops_with_lineage
 from brindco_momentum.execution.tax_model import Lot, compute_year_tax, consume_fifo, fiscal_year
+from brindco_momentum.paths import ROOT
 
 
 OUT = ROOT / "results/accounts_development/passive_lapse_rights_scenario"
-RIGHTS_EVIDENCE = ROOT / "results/accounts_development/rights_candidate_scan.csv"
+START = pd.Timestamp("2015-04-01")
+CUTOFF = pd.Timestamp("2023-03-31")
+RUNTIME_INPUTS = ROOT / "data/processed/runtime_inputs"
+RIGHTS_EVIDENCE = RUNTIME_INPUTS / "rights_candidate_scan.csv"
 DHANI_RIGHT = "CA_2dcc6f730654721a5203"
 ADANIENT_ASSUMPTION = "CA_09d4133ad6ad9024fa83"
 HGS_BONUS = "CA_a28c7ef7be5fba82424e"
@@ -41,10 +45,11 @@ INPUTS = {
     "winners": ROOT / "data/processed/momentum_winners.parquet",
     "overlay": ROOT / "data/processed/volatility_overlay_development.parquet",
     "panel": ROOT / "data/processed/research_panel_v2.parquet",
-    "event_application": ROOT / "results/stock_total_return_audit/event_application_detail.csv",
+    "event_application": RUNTIME_INPUTS / "event_application_detail.csv",
     "accepted_actions": ROOT / "data/processed/corporate_action_treatment/in_universe_event_treatments.parquet",
     "treated_actions": ROOT / "data/processed/corporate_action_treatment/nse_corporate_actions_treated_through_2023_03_31.parquet",
     "settlement": ROOT / "data/processed/nse_settlement_calendar_2015_2023.parquet",
+    "settlement_tail": ROOT / "data/processed/nse_settlement_calendar_holdout.parquet",
     "trading": ROOT / "data/processed/nse_trading_calendar_2013_2026.parquet",
     "operational_notices": ROOT / "data/processed/account_operational_event_notices.csv",
 }
@@ -80,9 +85,15 @@ def inputs() -> tuple[dict, list[date], dict, pd.DataFrame, dict]:
         raise ValueError("Invalid development trading calendar")
     # April 2023 holiday *metadata* resolves T+2 obligations from late March;
     # there are no April 2023 market prices or values in this read.
-    calendar = build_calendar(pd.Timestamp("2023-04-10"))
-    settling = list(calendar.loc[calendar.settlement_business_day, "date"].dt.date)
     frozen = pd.read_parquet(INPUTS["settlement"])
+    calendar = pd.concat([
+        frozen,
+        pd.read_parquet(INPUTS["settlement_tail"]).loc[
+            lambda frame: pd.to_datetime(frame["date"]).le("2023-04-10")
+        ],
+    ], ignore_index=True)
+    calendar["date"] = pd.to_datetime(calendar["date"])
+    settling = list(calendar.loc[calendar.settlement_business_day, "date"].dt.date)
     if not frozen.equals(calendar.loc[calendar.date.le(CUTOFF)].reset_index(drop=True)):
         raise ValueError("Settlement evidence differs from frozen development calendar")
 
@@ -270,11 +281,157 @@ def _advance_unominda_2018(state: AccountState, day: date,
                                 "held_quantity": quantity})
 
 
+def _apply_received_security(state: AccountState, day: date, event: dict,
+                             evidence: dict, marks: dict, event_audit: list[dict]) -> None:
+    """Record a mandatory received security without inventing an unlisted price."""
+    parent_id = event["security_id"]
+    received_id = evidence["received_security_id"]
+    if (evidence["verification_status"] != "VERIFIED_PRIMARY"
+            or pd.Timestamp(evidence["entitlement_date"]).date() != day
+            or evidence["parent_security_id"] != parent_id
+            or int(evidence["ratio_a"]) != 1 or int(evidence["ratio_b"]) != 10
+            or abs(float(evidence["received_basis_fraction"]) - 0.9623) > 1e-12
+            or abs(float(evidence["parent_basis_fraction"]) - 0.0377) > 1e-12
+            or state.economic_units(received_id)):
+        raise ValueError("Received-security evidence or existing position is inconsistent")
+    pending_bonus = [row for row in state.bonus_entitlements
+                     if row["security_id"] == parent_id and row["quantity"]]
+    if any(row["event_id"] != evidence["legacy_bonus_event_id"] for row in pending_bonus):
+        raise ValueError("Unverified parent bonus prevents demerger allocation")
+    parent_lots = [lot for lot in state.lots if lot.security_id == parent_id and lot.quantity]
+    bonus_quantity = sum(float(row["quantity"]) for row in pending_bonus)
+    held = sum(lot.quantity for lot in parent_lots) + bonus_quantity
+    if (not held or not float(held).is_integer() or not float(bonus_quantity).is_integer()
+            or any(lot.quantity <= 0 or lot.basis < 0 or
+                   lot.settled_quantity != lot.quantity for lot in parent_lots)):
+        raise ValueError("Demerger needs whole parent shares and verified bonus units")
+    whole, remainder = divmod(int(held), 10)
+    fractional_quantity = remainder / 10
+    original_basis = sum(lot.basis for lot in parent_lots)
+    received_lots = [Lot(f"{lot.lot_id}-{event['event_id']}-RECEIVED", received_id,
+                         lot.acquired, lot.quantity / 10, lot.basis * 0.9623,
+                         "ISSUER_DEMERGER_BASIS_ALLOCATION", 0)
+                     for lot in parent_lots]
+    for bonus in pending_bonus:
+        received_lots.append(Lot(
+            f"{state.account}-{bonus['event_id']}-{event['event_id']}-RECEIVED",
+            received_id, pd.Timestamp(evidence["legacy_bonus_allotment_date"]).date(),
+            float(bonus["quantity"]) / 10, 0.0,
+            "ZERO_BASIS_ISSUER_ALLOTTED_BONUS_LINEAGE", 0,
+        ))
+    fractional_basis = 0.0
+    remaining_fraction = fractional_quantity
+    for lot in sorted(received_lots, key=lambda item: (item.acquired, item.lot_id)):
+        if remaining_fraction <= 1e-12:
+            break
+        taken = min(remaining_fraction, lot.quantity)
+        basis_taken = lot.basis * taken / lot.quantity
+        lot.quantity -= taken
+        lot.basis -= basis_taken
+        fractional_basis += basis_taken
+        remaining_fraction -= taken
+    if (remaining_fraction > 1e-10
+            or abs(sum(lot.quantity for lot in received_lots) - whole) > 1e-10
+            or abs(sum(lot.basis for lot in received_lots) + fractional_basis
+                   - original_basis * 0.9623) > 1e-6):
+        raise ValueError("Received-security quantity or basis does not reconcile")
+    for lot in parent_lots:
+        lot.basis *= 0.0377
+    state.lots.extend(lot for lot in received_lots if lot.quantity > 1e-12)
+    if abs(sum(lot.basis for lot in parent_lots)
+           + sum(lot.basis for lot in received_lots) + fractional_basis
+           - original_basis) > 1e-6:
+        raise ValueError("Demerger aggregate basis is not conserved")
+    claim = {
+        "event_id": event["event_id"], "parent_security_id": parent_id,
+        "security_id": received_id, "entitlement_date": day,
+        "allotment_date": pd.Timestamp(evidence["allotment_date"]).date(),
+        "first_eligible_listing_date": pd.Timestamp(evidence["first_observable_price_date"]).date(),
+        "first_observable_price_date": None,
+        "quantity": whole, "original_parent_quantity": int(held),
+        "legacy_bonus_quantity": bonus_quantity,
+        "allocated_basis": sum(lot.basis for lot in received_lots),
+        "parent_basis_fraction": 0.0377, "received_basis_fraction": 0.9623,
+        "status": "UNLISTED_UNPRICED_CLAIM",
+        "evidence_source": evidence["primary_evidence_url"],
+    }
+    state.received_security_claims.append(claim)
+    if fractional_quantity:
+        state.fractional_received_claims.append({
+            "event_id": event["event_id"], "security_id": received_id,
+            "entitlement_date": day, "fractional_quantity": fractional_quantity,
+            "allocated_basis": fractional_basis, "market_value": 0.0,
+            "status": "UNPRICED_TRUSTEE_SALE_PROCEEDS",
+            "evidence_source": evidence["fractional_evidence_url"],
+        })
+    if whole:
+        marks[received_id] = 0.0
+    event_audit.append({"date": day, "event_id": event["event_id"],
+                        "security_id": parent_id, "received_security_id": received_id,
+                        "status": "UNLISTED_RECEIVED_SECURITY_ZERO_MARK",
+                        "held_quantity": held, "received_quantity": whole,
+                        "legacy_bonus_quantity": bonus_quantity,
+                        "fractional_quantity": fractional_quantity,
+                        "received_basis": original_basis * 0.9623,
+                        "parent_basis": original_basis * 0.0377})
+
+
+def _recognise_received_listing(state: AccountState, day: date, prices: dict,
+                                event_audit: list[dict]) -> None:
+    for claim in state.received_security_claims:
+        if claim["status"] != "UNLISTED_UNPRICED_CLAIM":
+            continue
+        sid = claim["security_id"]
+        quote = prices.get(sid)
+        if (quote is None or not bool(quote.market_observed)
+                or quote.market_data_status != "OK"
+                or quote.series not in {"EQ", "BE", "BZ"}
+                or not isfinite(float(quote.close)) or quote.close <= 0):
+            continue
+        if day < claim["allotment_date"] or day < claim["first_eligible_listing_date"]:
+            raise ValueError("Received security has a quote before evidenced tradability")
+        for lot in state.lots:
+            if lot.security_id == sid:
+                lot.settled_quantity = lot.quantity
+        claim["status"] = "LISTED_PRICED"
+        claim["first_observable_price_date"] = day
+        event_audit.append({"date": day, "event_id": claim["event_id"],
+                            "security_id": sid,
+                            "status": "RECEIVED_SECURITY_FIRST_OBSERVABLE_PRICE",
+                            "received_quantity": claim["quantity"],
+                            "first_close": float(quote.close)})
+
+
+def _recognise_rights_trading(state: AccountState, day: date, prices: dict,
+                              event_audit: list[dict]) -> None:
+    for claim in state.rights_entitlements:
+        if claim["status"] != "OPEN_UNPRICED_TRADABLE_RE" or not claim["new_share_entitlement"]:
+            continue
+        if not claim["re_trade_start"] <= day <= claim["re_trade_end"]:
+            continue
+        sid = claim["re_security_id"]
+        quote = prices.get(sid)
+        if (quote is None or not bool(quote.market_observed)
+                or quote.market_data_status != "OK" or quote.series != "BE"
+                or not isfinite(float(quote.close)) or quote.close <= 0):
+            continue
+        for lot in state.lots:
+            if lot.security_id == sid:
+                lot.settled_quantity = lot.quantity
+        claim["status"] = "TRADABLE_RE"
+        claim["first_observable_price_date"] = day
+        event_audit.append({"date": day, "event_id": claim["event_id"],
+                            "security_id": sid, "status": "RE_FIRST_OBSERVABLE_PRICE",
+                            "quantity": claim["new_share_entitlement"],
+                            "first_close": float(quote.close)})
+
+
 def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
                   event_audit: list[dict], cash_events: list[dict],
                   rights_evidence: dict | None = None,
                   enable_alkylamine_cil: bool = False,
-                  enable_unominda_2018: bool = False) -> dict | None:
+                  enable_unominda_2018: bool = False,
+                  received_evidence: dict | None = None) -> dict | None:
     by_security = defaultdict(list)
     for row in rows:
         by_security[row["security_id"]].append(row)
@@ -289,7 +446,7 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
             if evidence is None or evidence["verification_status"] != "VERIFIED_PRIMARY":
                 return {"date": day, "event_id": event_id, "security_id": security_id,
                         "reason": "HELD_RIGHTS_TERMS_UNVERIFIED", "held_quantity": held}
-            if evidence["ordinary_status"] != "ORDINARY_VERIFIED":
+            if evidence["ordinary_status"] not in {"ORDINARY_VERIFIED", "TRADABLE_RE_VERIFIED"}:
                 return {"date": day, "event_id": event_id, "security_id": security_id,
                         "reason": "HELD_NONORDINARY_RIGHTS_ISSUE", "held_quantity": held}
             detail = rights_materiality(state, security_id)
@@ -298,12 +455,17 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
             verified_price = float(evidence["rights_subscription_price"])
             accepted_price = source["rights_subscription_price"]
             fractional_policy = evidence["fractional_policy"]
+            if not float(held).is_integer():
+                raise ValueError(f"Rights holding quantity is not whole: {event_id}")
+            entitlement_units, fractional_units = divmod(
+                int(held) * int(evidence["ratio_a"]), int(evidence["ratio_b"])
+            )
             if (not isfinite(ratio) or abs(ratio - verified_ratio) > 1e-12
                     or (pd.notna(accepted_price)
                         and abs(float(accepted_price) - verified_price) > 1e-8)
                     or fractional_policy not in {"FLOOR", "EXACT_INTEGER"}
                     or (fractional_policy == "EXACT_INTEGER"
-                        and not (held * ratio).is_integer())
+                        and fractional_units != 0)
                     or pd.Timestamp(evidence["ex_date"]).date() != day):
                 raise ValueError(f"Rights terms differ from verified offer: {event_id}")
             record_date = pd.Timestamp(evidence["record_date"]).date()
@@ -311,11 +473,11 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
             if not day <= record_date <= close_date:
                 raise ValueError(f"Invalid rights dates: {event_id}")
             # Rights accrue at ex-date; record date establishes the legal holder.
-            whole_entitlement = floor(held * ratio)
+            whole_entitlement = entitlement_units
             claim = {"date": day, "event_id": event_id, "security_id": security_id,
                      "entitlement_date": record_date,
                      "pre_event_shares": held, "new_share_entitlement": whole_entitlement,
-                     "indicative_fractional_entitlement": held * ratio - whole_entitlement,
+                     "indicative_fractional_entitlement": fractional_units / int(evidence["ratio_b"]),
                      "fractional_policy": fractional_policy,
                      "subscription_price": verified_price, "subscribed": False,
                      "realised_sale_proceeds": 0.0, "account_claim_value": None,
@@ -325,6 +487,25 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
                      "status": "OPEN_UNPRICED_PASSIVE_LAPSE",
                      "materiality_status": detail["status"]}
             state.rights_entitlements.append(claim)
+            if evidence["ordinary_status"] == "TRADABLE_RE_VERIFIED":
+                re_id = evidence["re_security_id"]
+                trade_start = pd.Timestamp(evidence["re_trade_start"]).date()
+                trade_end = pd.Timestamp(evidence["re_trade_end"]).date()
+                if (state.economic_units(re_id) or not record_date < trade_start <= trade_end < close_date
+                        or not isinstance(re_id, str) or not re_id.startswith("NSE_")
+                        or not isinstance(evidence["re_isin"], str)
+                        or not isinstance(evidence["re_symbol"], str)
+                        or evidence["re_series"] != "BE"):
+                    raise ValueError(f"Tradable rights security or window is invalid: {event_id}")
+                claim.update({"re_security_id": re_id, "re_trade_start": trade_start,
+                              "re_trade_end": trade_end, "sold_quantity": 0,
+                              "lapsed_quantity": 0,
+                              "status": "OPEN_UNPRICED_TRADABLE_RE"})
+                if whole_entitlement:
+                    state.lots.append(Lot(f"{state.account}-{event_id}-RE", re_id,
+                                          record_date, whole_entitlement, 0.0,
+                                          "ORIGINAL_HOLDER_RENUNCIATION_ZERO_BASIS", 0))
+                    marks[re_id] = 0.0
             event_audit.append({**claim, "held_quantity": held})
             ids.remove(event_id)
         group = [row for row in group if row["event_id"] in ids]
@@ -345,6 +526,13 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
                                     "status": "VERIFIED_COMBINED", "held_quantity": held})
                 continue
             status = row["application_status"]
+            if status == "RECEIVED_SECURITY_CLAIM":
+                evidence = (received_evidence or {}).get(event_id)
+                if evidence is None or row["primary_class"] != "STRUCTURAL":
+                    return {"date": day, "event_id": event_id, "security_id": security_id,
+                            "reason": "HELD_RECEIVED_SECURITY_TERMS_UNVERIFIED"}
+                _apply_received_security(state, day, row, evidence, marks, event_audit)
+                continue
             if event_id == ADANIENT_ASSUMPTION:
                 event_audit.append({"date": day, "event_id": event_id, "security_id": security_id,
                                     "status": "FROZEN_ZERO_INCREMENTAL_MODELLING", "held_quantity": held})
@@ -414,6 +602,25 @@ def _apply_events(state: AccountState, day: date, rows: list[dict], marks: dict,
 
 def _expire_rights(state: AccountState, day: date, event_audit: list[dict]) -> None:
     for claim in state.rights_entitlements:
+        if claim.get("re_security_id") and day >= claim["expiry_date"] and claim["status"] in {
+            "OPEN_UNPRICED_TRADABLE_RE", "TRADABLE_RE", "PARTIALLY_RENOUNCED_RE"
+        }:
+            re_id = claim["re_security_id"]
+            remaining = state.owned(re_id)
+            for lot in state.lots:
+                if lot.security_id == re_id:
+                    if lot.basis != 0:
+                        raise ValueError("Lapsing rights entitlement unexpectedly has basis")
+                    lot.quantity = 0
+                    lot.settled_quantity = 0
+            claim["lapsed_quantity"] = remaining
+            claim["lapse_date"] = claim["expiry_date"]
+            claim["status"] = ("PARTIALLY_RENOUNCED_AND_LAPSED" if claim["sold_quantity"]
+                               else "LAPSED_UNEXERCISED")
+            event_audit.append({"date": day, "event_id": claim["event_id"],
+                                "security_id": re_id, "status": claim["status"],
+                                "lapsed_quantity": remaining,
+                                "sold_quantity": claim["sold_quantity"]})
         if claim["status"] == "OPEN_UNPRICED_PASSIVE_LAPSE" and day >= claim["expiry_date"]:
             claim["status"] = "LAPSED_UNEXERCISED"
             claim["lapse_date"] = claim["expiry_date"]
@@ -427,13 +634,14 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                 panel: pd.DataFrame, common: dict, output_dir: Path = OUT,
                 scenario: str = "PASSIVE_LAPSE_RIGHTS_SCENARIO",
                 enable_alkylamine_cil: bool = False,
-                enable_unominda_2018: bool = False) -> dict:
+                enable_unominda_2018: bool = False,
+                opening_snapshot: dict | None = None) -> dict:
     state = AccountState(name)
     by_date = iter(panel.groupby("date", sort=True))
     next_group = next(by_date, None)
     marks = {}
     orders, fills, positions, cash_events, nav_daily = [], [], [], [], []
-    gains, tax_years, event_audit = [], [], []
+    gains, tax_years, event_audit, received_claim_days = [], [], [], []
     opening_losses = []
     current_fy = fiscal_year(sessions[0])
     current_gains = []
@@ -442,7 +650,45 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
     last_nav = state.cash
     blocker = None
     maximum_market_date = panel.date.max().date()
-    cash_events.append({"date": sessions[0], "category": "INITIAL_FUNDING", "amount": state.cash})
+    if opening_snapshot is None:
+        cash_events.append({"date": sessions[0], "category": "INITIAL_FUNDING", "amount": state.cash})
+    else:
+        if opening_snapshot.get("blocker") is not None:
+            raise ValueError("Cannot continue a blocked development account")
+        state.cash = float(opening_snapshot["cash"])
+        state.tax_liability = float(opening_snapshot["tax_liability"])
+        state.lots = [Lot(**{**row, "acquired": date.fromisoformat(row["acquired"])})
+                      for row in opening_snapshot["lots"]]
+        for field in ("sale_receivables", "dividend_receivables", "bonus_entitlements",
+                      "rights_entitlements", "fractional_split_claims", "fractional_bonus_claims",
+                      "received_security_claims", "fractional_received_claims"):
+            records = []
+            for source in opening_snapshot.get(field, []):
+                record = source.copy()
+                for key, value in record.items():
+                    if isinstance(value, str) and (key == "date" or key.endswith("_date")):
+                        record[key] = date.fromisoformat(value)
+                records.append(record)
+            setattr(state, field, records)
+        pending_buy_lots = [{**row, "settlement_date": date.fromisoformat(row["settlement_date"])}
+                            for row in opening_snapshot["pending_buy_lots"]]
+        opening_losses = opening_snapshot["opening_losses"].copy()
+        current_gains = opening_snapshot["current_gains"].copy()
+        tax_years = opening_snapshot["tax_years"].copy()
+        marks = {sid: float(mark) for sid, mark in opening_snapshot["last_marks"].items()}
+        last_nav = state.nav(marks)
+        previous_fy = fiscal_year(date(2023, 3, 31))
+        if current_fy != previous_fy:
+            result = compute_year_tax(current_gains, opening_losses, previous_fy)
+            paid = min(state.cash, result["liability"])
+            state.cash -= paid
+            state.tax_liability -= paid
+            tax_years.append({**result, "paid": paid})
+            opening_losses = result["closing_losses"]
+            current_gains = []
+            if paid:
+                cash_events.append({"date": sessions[0], "category": "CARRIED_FY_TAX_PAYMENT",
+                                    "event_id": str(previous_fy), "amount": -paid})
 
     for day_index, day in enumerate(sessions):
         day_stamp = pd.Timestamp(day)
@@ -460,11 +706,31 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
         month_sessions += 1
 
         try:
+            if common.get("hard_stops") is not None:
+                held_ids = {lot.security_id for lot in state.lots if lot.quantity > 0}
+                held_ids.update(row["security_id"] for row in state.bonus_entitlements
+                                if row["quantity"] > 0)
+                hits = held_hard_stops_with_lineage(
+                    common["hard_stops"], common["dated_identity"], held_ids, day
+                )
+                if not hits.empty:
+                    event = hits.sort_values("event_id").iloc[0]
+                    blocker = {"date": day, "event_id": event["event_id"],
+                               "security_id": event["security_id"] if pd.notna(event["security_id"]) else None,
+                               "symbol": event["symbol"], "reason": "HARD_STOP_IF_HELD",
+                               "source_reason": event.get("reason"),
+                               "held_security_ids": sorted(held_ids)}
+                    break
             notices = common.get("operational_notices", [])
             active_exit_ids = {row["security_id"] for row in notices
                                if day > row["announcement_date"]}
             due_exit_ids = {row["security_id"] for row in notices
                             if row["announcement_date"] < day < row["effective_date"]}
+            re_exit_ids = {claim["re_security_id"] for claim in state.rights_entitlements
+                           if claim.get("re_security_id")
+                           and claim["re_trade_start"] <= day <= claim["re_trade_end"]
+                           and state.owned(claim["re_security_id"]) > 0}
+            due_exit_ids.update(re_exit_ids)
             for notice in notices:
                 if day == notice["effective_date"] and state.economic_units(notice["security_id"]):
                     blocker = {"date": day, "event_id": notice["event_id"],
@@ -478,9 +744,12 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                 break
             blocker = _apply_events(state, day, common["events"].get(day, []), marks,
                                     event_audit, cash_events, common["rights"],
-                                    enable_alkylamine_cil, enable_unominda_2018)
+                                    enable_alkylamine_cil, enable_unominda_2018,
+                                    common.get("received_security_evidence"))
             if blocker:
                 break
+            _recognise_received_listing(state, day, prices, event_audit)
+            _recognise_rights_trading(state, day, prices, event_audit)
             if enable_unominda_2018:
                 _advance_unominda_2018(state, day, event_audit)
             _expire_rights(state, day, event_audit)
@@ -543,6 +812,10 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                         reason = ("MANDATORY_EXIT_FILLED" if qty == desired_qty else
                                   "MANDATORY_EXIT_PARTIAL" if qty else
                                   "MANDATORY_EXIT_UNSETTLED_OR_CAP")
+                        if sid in re_exit_ids and not qty and (
+                                not isfinite(float(quote.adv20_lagged))
+                                or quote.adv20_lagged <= 0):
+                            reason = "RE_SALE_NO_LAGGED_ADV"
                     else:
                         reason = "ELIGIBLE" if qty else "UNSETTLED_OR_CAP"
                     if (not bool(quote.market_observed) or quote.market_data_status != "OK"
@@ -568,6 +841,16 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                                   "security_id": sid, "side": "SELL", "settlement_date": due, **terms})
                     cash_events.append({"date": day, "category": "SALE_RECEIVABLE",
                                         "event_id": fill_id, "amount": terms["cash_flow"]})
+                    if sid in re_exit_ids:
+                        claim = next(row for row in state.rights_entitlements
+                                     if row.get("re_security_id") == sid)
+                        claim["sold_quantity"] += qty
+                        claim["realised_sale_proceeds"] += terms["cash_flow"]
+                        claim["status"] = ("FULLY_RENOUNCED" if not state.owned(sid)
+                                           else "PARTIALLY_RENOUNCED_RE")
+                        event_audit.append({"date": day, "event_id": claim["event_id"],
+                                            "security_id": sid, "status": "RE_SOLD",
+                                            "quantity": qty, "fill_id": fill_id})
 
                 provision = compute_year_tax(current_gains, opening_losses, current_fy)
                 state.tax_liability = sum(row["liability"] - row["paid"] for row in tax_years) + provision["liability"]
@@ -643,7 +926,12 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
             stale = []
             held_ids = {lot.security_id for lot in state.lots if lot.quantity}
             held_ids |= {row["security_id"] for row in state.bonus_entitlements}
+            unlisted_ids = {row["security_id"] for row in state.received_security_claims
+                            if row["status"] == "UNLISTED_UNPRICED_CLAIM"}
             for sid in held_ids:
+                if sid in unlisted_ids:
+                    marks[sid] = 0.0
+                    continue
                 quote = prices.get(sid)
                 if quote is not None and isfinite(float(quote.close)) and quote.close > 0 and bool(quote.market_observed):
                     marks[sid] = float(quote.close)
@@ -671,6 +959,10 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
             unpriced_split = bool(state.fractional_split_claims)
             if unpriced_split:
                 nav_status = "UNPRICED_FRACTIONAL_SPLIT_CLAIM_EXCLUDED"
+            elif state.fractional_bonus_claims:
+                nav_status = "UNPRICED_FRACTIONAL_BONUS_CLAIM_EXCLUDED"
+            elif unlisted_ids or state.fractional_received_claims:
+                nav_status = "UNLISTED_RECEIVED_SECURITY_ZERO_MARK"
             elif unpriced_rights:
                 nav_status = "PASSIVE_LAPSE_UNPRICED_RIGHT_EXCLUDED"
             elif state.rights_entitlements:
@@ -681,6 +973,7 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                               "daily_return": nav / last_nav - 1,
                               "nav_status": nav_status,
                               "unpriced_rights_count": unpriced_rights,
+                              "unpriced_fractional_bonus_claim_count": len(state.fractional_bonus_claims),
                               "stocks": stock_value, "settled_cash": state.cash,
                               "sale_receivables": sale_claims,
                               "dividend_receivables": dividend_claims,
@@ -689,11 +982,32 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                               "reconciliation_error": nav - check})
             last_nav = nav
             for sid in sorted(held_ids):
+                received = next((row for row in state.received_security_claims
+                                 if row["security_id"] == sid), None)
                 positions.append({"date": day, "account": name, "security_id": sid,
                                   "owned_shares": state.owned(sid), "settled_shares": state.settled(sid),
                                   "unavailable_bonus_units": state.economic_units(sid) - state.owned(sid),
                                   "close_mark": marks[sid], "mark_stale": sid in stale,
-                                  "market_value": state.economic_units(sid) * marks[sid]})
+                                  "market_value": state.economic_units(sid) * marks[sid],
+                                  "tradable": sid not in unlisted_ids,
+                                  "valuation_status": ("UNLISTED_UNPRICED_CLAIM" if sid in unlisted_ids
+                                                       else "LISTED_PRICED" if received else "ORDINARY_MARK"),
+                                  "source_event_id": received["event_id"] if received else None})
+            for claim in state.received_security_claims:
+                if claim["status"] == "UNLISTED_UNPRICED_CLAIM":
+                    received_claim_days.append({
+                        "date": day, "account": name, "event_id": claim["event_id"],
+                        "parent_security_id": claim["parent_security_id"],
+                        "received_security_id": claim["security_id"],
+                        "quantity": state.owned(claim["security_id"]),
+                        "fractional_quantity": sum(
+                            row["fractional_quantity"] for row in state.fractional_received_claims
+                            if row["event_id"] == claim["event_id"]),
+                        "market_value": 0.0, "allocated_basis": claim["allocated_basis"],
+                        "entitlement_date": claim["entitlement_date"],
+                        "first_observable_price_date": None,
+                        "valuation_status": "UNLISTED_UNPRICED_CLAIM",
+                    })
             next_fy = fiscal_year(sessions[day_index + 1]) if day_index + 1 < len(sessions) else current_fy
             if next_fy != current_fy:
                 result = compute_year_tax(current_gains, opening_losses, current_fy)
@@ -723,6 +1037,10 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
               "unpriced_fractional_split_claim_count": len(state.fractional_split_claims),
               "unpriced_fractional_split_quantity": sum(
                   row["fractional_quantity"] for row in state.fractional_split_claims),
+              "unpriced_fractional_bonus_claim_count": len(state.fractional_bonus_claims),
+              "zero_marked_received_security_days": len(received_claim_days),
+              "max_zero_marked_allocated_basis": max(
+                  (row["allocated_basis"] for row in received_claim_days), default=0.0),
               "maximum_value_bearing_market_date_read": maximum_market_date,
               "last_market_date_processed": day,
               "unspendable_dividend_count": len(state.dividend_receivables),
@@ -739,6 +1057,7 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                                 ("cash_events", cash_events), ("nav_daily", nav_daily),
                                 ("realised_gains", gains), ("tax_years", tax_years),
                                 ("held_event_audit", event_audit),
+                                ("received_security_account_days", received_claim_days),
                                 ("dividend_receivables", state.dividend_receivables),
                                 ("bonus_entitlements", state.bonus_entitlements)]:
         if records:
@@ -755,6 +1074,17 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
         claims = pd.DataFrame(state.fractional_split_claims)
         claims["input_manifest_hash"] = common["manifest_hash"]
         claims.to_parquet(output_dir / f"{name}_fractional_split_claims.parquet", index=False)
+    if state.fractional_bonus_claims:
+        claims = pd.DataFrame(state.fractional_bonus_claims)
+        claims["input_manifest_hash"] = common["manifest_hash"]
+        claims.to_parquet(output_dir / f"{name}_fractional_bonus_claims.parquet", index=False)
+    for label, records in (("received_security_claims", state.received_security_claims),
+                           ("fractional_received_claims", state.fractional_received_claims)):
+        if records:
+            frame = pd.DataFrame(records)
+            frame["account"] = name
+            frame["input_manifest_hash"] = common["manifest_hash"]
+            frame.to_parquet(output_dir / f"{name}_{label}.parquet", index=False)
     snapshot = {"cash": state.cash, "tax_liability": state.tax_liability,
                 "lots": [lot.__dict__ for lot in state.lots if lot.quantity],
                 "sale_receivables": state.sale_receivables,
@@ -762,6 +1092,9 @@ def run_account(name: str, selections: dict, sessions: list[date], exposures: di
                 "bonus_entitlements": state.bonus_entitlements,
                 "rights_entitlements": state.rights_entitlements,
                 "fractional_split_claims": state.fractional_split_claims,
+                "fractional_bonus_claims": state.fractional_bonus_claims,
+                "received_security_claims": state.received_security_claims,
+                "fractional_received_claims": state.fractional_received_claims,
                 "pending_buy_lots": pending_buy_lots, "opening_losses": opening_losses,
                 "current_gains": current_gains, "tax_years": tax_years,
                 "last_marks": marks, "blocker": blocker}

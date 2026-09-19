@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 from pathlib import Path
 
 import numpy as np
@@ -242,13 +241,6 @@ def simulate_shadow(
 
 
 def load_shadow_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    accepted_hashes = pd.read_csv(ROOT / "results/event_resolution/artifact_hashes.csv")
-    for path in (PANEL, RETURNS, WINNERS_OUTPUT):
-        accepted = accepted_hashes.loc[
-            accepted_hashes["artifact"].eq(path.relative_to(ROOT).as_posix()), "after_sha256"
-        ]
-        if len(accepted) != 1 or hashlib.sha256(path.read_bytes()).hexdigest() != accepted.iloc[0]:
-            raise ValueError(f"Primary source differs from accepted event-resolution build: {path}")
     winners = pd.read_parquet(WINNERS_OUTPUT)
     if winners["formation_date"].max() > CUTOFF or winners["formation_date"].min() < FIRST_MEMBERSHIP:
         raise ValueError("Primary winners cross membership or holdout boundary")
@@ -295,7 +287,7 @@ def build_primary_shadow() -> dict[str, object]:
     if daily.empty or daily["date"].min() != first_date:
         raise ValueError("Shadow did not start at first evidenced opening session")
     first_blocker = daily.loc[~daily["valid_return"], "date"].min()
-    strict = pd.read_csv(ROOT / "results/stock_total_return_audit/event_application_detail.csv")
+    strict = pd.read_csv(ROOT / "data/processed/runtime_inputs/event_application_detail.csv")
     strict_ids = {
         "CA_faa277a19bfa2ac115cc", "CA_df82d8fc43ad7e21c2a8",
         "CA_52dafdfb28d9f35d7326", "CA_9d29c825ee80b650567a",

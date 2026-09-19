@@ -29,6 +29,9 @@ class AccountState:
     bonus_entitlements: list[dict] = field(default_factory=list)
     rights_entitlements: list[dict] = field(default_factory=list)
     fractional_split_claims: list[dict] = field(default_factory=list)
+    fractional_bonus_claims: list[dict] = field(default_factory=list)
+    received_security_claims: list[dict] = field(default_factory=list)
+    fractional_received_claims: list[dict] = field(default_factory=list)
     tax_liability: float = 0.0
     tax_paid: float = 0.0
 

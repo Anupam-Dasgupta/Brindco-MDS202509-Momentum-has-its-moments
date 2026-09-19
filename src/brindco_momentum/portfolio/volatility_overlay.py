@@ -27,7 +27,7 @@ EASE_SECURITY = "NSE_4F096D93F0F3"
 EASE_BONUS = "CA_bd1a9c0fb614d418b033"
 EASE_SPLIT = "CA_d980fda0218090aafc5e"
 EASE_FILING = "https://www.easemytrip.com/investor-pdf/2022/Intimation-of-Record-Date-22-11-2022.pdf"
-EVENT_DETAIL = ROOT / "results/stock_total_return_audit/event_application_detail.csv"
+EVENT_DETAIL = ROOT / "data/processed/runtime_inputs/event_application_detail.csv"
 ZERO_STATUS = "MODELLED_ZERO_INCREMENTAL_ENTITLEMENT"
 COMBINED_STATUS = "VERIFIED_ORDINARY_COMBINED_ACTION"
 STRICT_HOLDINGS = OUTPUT / "primary_shadow_holdings.parquet"
@@ -198,9 +198,9 @@ def build_return_overrides(market: pd.DataFrame) -> dict[tuple[pd.Timestamp, str
 
 
 def formation_risk(calendar: pd.DataFrame, winners: pd.DataFrame,
-                   daily: pd.DataFrame) -> pd.DataFrame:
+                   daily: pd.DataFrame, cutoff: pd.Timestamp = CUTOFF) -> pd.DataFrame:
     dates = pd.DatetimeIndex(calendar["date"].sort_values().drop_duplicates())
-    if dates.max() > CUTOFF or daily["date"].max() > CUTOFF:
+    if dates.max() > cutoff or daily["date"].max() > cutoff:
         raise ValueError("Risk calculation crossed the development cutoff")
     if daily.duplicated("date").any() or not daily["date"].is_monotonic_increasing:
         raise ValueError("Modelling shadow has duplicate or unordered sessions")

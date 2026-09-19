@@ -1,0 +1,7 @@
+# Raw-source distribution
+
+The large daily NSE bhavcopy archives used during research are omitted from the compact submission copy. `OMITTED_SOURCE_MANIFEST.csv` records each omitted file's former relative name, official source URL where recorded or mechanically reconstructed from the repository's NSE downloader rule, source date where available, SHA-256, size, and purpose. The one rejected third-party membership file has no retained source URL and is explicitly labelled rejected; it is **not** an accepted NIFTY 500 membership source.
+
+The accepted normalized inputs under `data/processed/`, the dated evidence manifests, and the completed-run freeze manifest identify what the final strategy actually used. Do not replace those accepted artifacts with current constituents or a different adjusted-price series. A complete acquisition-layer rebuild requires fetching the manifest-listed official sources and running the acquisition/normalization scripts; an exact strategy replay from accepted processed inputs does not read the omitted archives.
+
+Official membership notices, selected corporate-action primary evidence, and raw corporate-action API responses remain here because retained evidence tests verify their exact bytes. The small identity and benchmark files also remain: `security_identity/EQUITY_L.csv` is hashed in the completed-run freeze. Source manifests under `data/processed/membership_official/`, `data/processed/corporate_action_treatment/`, and `data/evidence/membership_holdout/` provide notice-level URLs, dates, and hashes.

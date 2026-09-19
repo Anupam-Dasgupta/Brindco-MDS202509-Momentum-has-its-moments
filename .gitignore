@@ -1,200 +1,36 @@
-# ============================================================
-# Python
-# ============================================================
-
 __pycache__/
-**/__pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environments
 .venv/
-venv/
-env/
-ENV/
-
-# Test / tooling caches
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-.coverage.*
-htmlcov/
-.tox/
-.nox/
-
-# Packaging
+*.egg-info/
 build/
 dist/
-*.egg-info/
-.eggs/
-
-
-# ============================================================
-# IDE / OS
-# ============================================================
-
+.coverage
+htmlcov/
 .vscode/
 .idea/
-*.swp
-*.swo
-
 .DS_Store
 Thumbs.db
-desktop.ini
-
-
-# ============================================================
-# Temporary / local files
-# ============================================================
-
 *.log
 *.tmp
-*.temp
-~$*
-
+.env
 repo_structure.txt
 
-.env
-.env.*
-!.env.example
+# Public archives are omitted; the two provenance files remain tracked.
+data/raw/*
+!data/raw/README.md
+!data/raw/OMITTED_SOURCE_MANIFEST.csv
 
-secrets/
-*.key
-*.pem
-
-
-# ============================================================
-# RAW MARKET DATA
-#
-# Huge NSE bhavcopy / downloaded archives should be reproduced
-# by the acquisition scripts rather than committed to Git.
-# ============================================================
-
-data/raw/
-
-
-# ============================================================
-# LARGE GENERATED PROCESSED DATA
-#
-# These are reproducible outputs and should not live in Git.
-# ============================================================
-
-data/processed/**/*.parquet
-data/processed/**/*.feather
-data/processed/**/*.pickle
-data/processed/**/*.pkl
-
-
-# ============================================================
-# KEEP SMALL / IMPORTANT PROCESSED INPUTS
-#
-# CSV/JSON files containing manually curated rules, manifests,
-# calendars, event notices, evidence mappings, etc. remain tracked.
-# ============================================================
-
-!data/processed/**/*.csv
-!data/processed/**/*.json
-!data/processed/**/*.md
-!data/processed/**/*.txt
-
-
-# ============================================================
-# OFFICIAL EVIDENCE DOCUMENTS
-#
-# Don't commit the large collection of downloaded PDFs.
-# Keep manifests / hashes / metadata instead.
-# ============================================================
-
-data/evidence/**/*.pdf
-data/evidence/**/*.zip
-data/evidence/**/*.xlsx
-data/evidence/**/*.xls
-
-!data/evidence/**/*manifest*.csv
-!data/evidence/**/*.csv
-!data/evidence/**/*.md
-!data/evidence/**/*.txt
-!data/evidence/**/*.json
-
-
-# ============================================================
-# MANUAL / CURATED INPUTS
-#
-# DO NOT IGNORE data/manual/
-#
-# Files such as:
-#   corporate_action_research_v1.csv
-#   corporate_action_resolutions_v1.csv
-#   membership_official_event_overrides.csv
-#
-# are part of the research specification and should be committed.
-# ============================================================
-
-
-# ============================================================
-# ACCOUNT / BACKTEST RESULTS
-#
-# Ignore bulky generated account ledgers.
-# ============================================================
-
-results/**/*.parquet
-results/**/*.feather
-results/**/*.pickle
-results/**/*.pkl
-
-
-# ============================================================
-# KEEP RESULT SUMMARIES / AUDITS / MANIFESTS
-# ============================================================
-
-!results/**/*.csv
-!results/**/*.json
-!results/**/*.md
-
-
-# ============================================================
-# HISTORICAL / DEBUG ACCOUNT SCENARIOS
-#
-# These were useful during development but do not need to clutter
-# the final submission repository.
-# ============================================================
-
-results/accounts_development/passive_lapse/
-results/accounts_development/passive_lapse_rights_scenario/
-results/accounts_development/passive_lapse_rights_alkylamine_cil_scenario/
-results/accounts_development/unominda2018_lifecycle_scenario/
-
-
-# ============================================================
-# SCENARIO EVIDENCE PDF COPIES
-# ============================================================
-
-results/**/evidence/*.pdf
-
-
-# ============================================================
-# LOCAL INFORMATION / APPLICATION FILES
-#
-# Do not put your resume/JD in the research repo.
-# ============================================================
-
-info/*.pdf
-
-# Keep useful markdown notes only if desired.
-# If you want an extremely clean submission you can instead ignore:
-# info/
-
-
-# ============================================================
-# Submission archives
-# ============================================================
+# Reproduction uses these directories as temporary work areas.
+results/accounts_development/
+results/accounts_holdout/
+results/controls_development/
+results/evaluation_development/
+results/momentum_signal_audit/
+results/shadow_audit/
+results/volatility_overlay_audit/
+results/holdout_bundle_blocker.json
 
 *.zip
 *.7z
 *.rar
-
-submission/
-
-# Personal / recruitment reference material
-info/

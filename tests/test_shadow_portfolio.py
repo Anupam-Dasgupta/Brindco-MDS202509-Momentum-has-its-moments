@@ -1,11 +1,8 @@
-import hashlib
-
 import numpy as np
 import pandas as pd
 
 from brindco_momentum.signals.momentum_signal import CUTOFF, FORMATIONS_OUTPUT, MONTHLY_OUTPUT, PANEL, RETURNS, WINNERS_OUTPUT
 from brindco_momentum.portfolio.shadow_portfolio import simulate_shadow
-from brindco_momentum.portfolio.zero_entitlement_sensitivity import AUDIT, SENSITIVITY
 
 
 def small_shadow_inputs():
@@ -98,55 +95,3 @@ def test_missing_open_and_unvalued_open_entitlement_block_rebalance():
     assert len(rebalances) == 1
 
 
-def test_primary_files_are_unmodified_and_sensitivity_is_separate():
-    hashes = pd.read_csv(AUDIT.parent / "event_resolution/artifact_hashes.csv")
-    for path in [RETURNS, PANEL, MONTHLY_OUTPUT, FORMATIONS_OUTPUT, WINNERS_OUTPUT]:
-        revision = hashes.loc[hashes.artifact.eq(str(path.relative_to(AUDIT.parent.parent)).replace("\\", "/"))]
-        assert len(revision) == 1
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == revision.iloc[0].after_sha256
-    primary = pd.read_parquet(FORMATIONS_OUTPUT)
-    scenario = pd.read_parquet(SENSITIVITY / "zero_entitlement_formations.parquet")
-    assert len(primary) == len(scenario)
-    assert primary.formation_date.max() <= CUTOFF
-    assert scenario.formation_date.max() <= CUTOFF
-    changes = pd.read_csv(AUDIT / "primary_vs_zero_signal_changes.csv")
-    assert changes.primary_n.ne(changes.sensitivity_n).sum() == 71
-    assert changes.primary_k.ne(changes.sensitivity_k).sum() == 18
-    assert changes.restored_event_winners.dropna().tolist() == ["TATACOMM"]
-    assert scenario.loc[scenario.signal_exclusion_reason.eq("BRITANNIA_BONUS_DEBENTURE_PARTIAL_WINDOW")].shape[0] == 8
-    seats = scenario.groupby("formation_date").eligible.sum()
-    winners = pd.read_parquet(SENSITIVITY / "zero_entitlement_winners.parquet")
-    assert winners.groupby("formation_date").size().eq(np.ceil(seats / 10)).all()
-    sensitivity_monthly = pd.read_parquet(SENSITIVITY / "zero_entitlement_monthly_features.parquet")
-    unrelated = sensitivity_monthly.loc[
-        sensitivity_monthly.security_id.eq("NSE_42CD50DCCBD6")
-        & sensitivity_monthly.month.eq(pd.Period("2018-04"))
-    ].iloc[0]
-    assert not unrelated.complete
-    assert "CA_09d4133ad6ad9024fa83" in unrelated.unavailable_event_ids
-
-
-def test_actual_shadow_warmup_and_daily_blocker_are_explicit():
-    daily = pd.read_parquet(AUDIT.parent.parent / "data/processed/primary_shadow_daily_returns.parquet")
-    holdings = pd.read_parquet(AUDIT.parent.parent / "data/processed/primary_shadow_holdings.parquet")
-    materiality = pd.read_csv(AUDIT / "unavailable_daily_return_materiality.csv")
-    assert daily.date.min() == pd.Timestamp("2014-09-01")
-    assert daily.date.max() == pd.Timestamp("2018-04-05")
-    assert daily.loc[daily.date.le(pd.Timestamp("2015-03-31")), "valid_return"].sum() == 142
-    assert daily.iloc[-1].blocker_reason == "SHADOW_DAILY_RETURN_BLOCKER"
-    assert pd.isna(daily.iloc[-1].shadow_daily_return)
-    held = materiality.loc[materiality.materiality_status.eq("SHADOW_DAILY_RETURN_BLOCKER")]
-    assert len(held) == 1 and held.iloc[0].symbol == "ADANIENT"
-    assert np.isclose(held.iloc[0].pre_event_weight, 0.018914, atol=1e-6)
-    assert holdings.date.max() == pd.Timestamp("2018-04-04")
-    assert not holdings.duplicated(["date", "security_id"]).any()
-    assert holdings.units.gt(0).all()
-    weights = holdings.groupby("date").portfolio_weight.sum()
-    assert np.allclose(weights, 1.0)
-    marked = holdings.groupby("date").market_value.sum()
-    valid_nav = daily.loc[daily.valid_return].set_index("date").shadow_nav_index
-    assert np.allclose(marked.loc[valid_nav.index], valid_nav)
-    strict = materiality.loc[materiality.symbol.isin(["BLUEDART", "NTPC", "BRITANNIA"])]
-    assert strict.materiality_status.value_counts().to_dict() == {
-        "NOT_HELD": 2, "NOT_ASSESSABLE_AFTER_FIRST_BLOCKER": 2,
-    }

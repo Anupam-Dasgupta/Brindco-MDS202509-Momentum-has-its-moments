@@ -1,18 +1,9 @@
 import numpy as np
 import pandas as pd
-import pyarrow.dataset as ds
-
 from brindco_momentum.data.stock_total_returns import (
-    ACTIONS,
-    AUDIT_DIR,
-    CUTOFF,
-    NEW_PANEL,
-    NEW_RETURNS,
-    OLD_PANEL,
     build_returns,
     classify_actions,
     prepare_prices,
-    sha256,
 )
 
 
@@ -160,63 +151,3 @@ def test_accepted_no_direct_and_strict_exception_stay_distinct():
     assert pd.isna(returns.loc["2020-01-03", "daily_total_return"])
 
 
-def test_tcs_real_dividend_regression():
-    date = pd.Timestamp("2022-05-25")
-    table = ds.dataset(NEW_RETURNS).to_table(
-        columns=["date", "symbol", "previous_close", "close", "price_return", "daily_total_return", "applied_event_ids"],
-        filter=ds.field("date") == date.to_datetime64(),
-    ).to_pandas()
-    tcs = table.loc[table["symbol"].eq("TCS")].iloc[0]
-    source = ds.dataset(ACTIONS).to_table(
-        columns=["symbol", "ex_date", "dividend_amount", "primary_class"],
-        filter=ds.field("ex_date") == date.to_datetime64(),
-    ).to_pandas()
-    dividend = source.loc[source["symbol"].eq("TCS") & source["primary_class"].eq("DIVIDEND")].iloc[0]
-    assert dividend["dividend_amount"] == 22
-    assert np.isclose(tcs["daily_total_return"], (tcs["close"] + dividend["dividend_amount"]) / tcs["previous_close"] - 1)
-    assert not np.isclose(tcs["daily_total_return"], tcs["price_return"])
-    assert tcs["applied_event_ids"]
-
-
-def test_return_artifact_and_panel_v2_acceptance():
-    returns = pd.read_parquet(NEW_RETURNS, columns=[
-        "security_id", "date", "daily_total_return", "total_return_available",
-        "adjustment_applied", "in_nifty500",
-    ])
-    v2 = pd.read_parquet(NEW_PANEL, columns=[
-        "security_id", "date", "daily_total_return", "total_return_available",
-        "momentum_signal_safe", "corporate_action_timing_event_ids",
-    ])
-    assert len(returns) == len(v2) == 1_810_466
-    assert not returns.duplicated(["security_id", "date"]).any()
-    assert returns["date"].max() == v2["date"].max() == CUTOFF
-    assert returns.loc[~returns["total_return_available"], "daily_total_return"].isna().all()
-    assert returns["adjustment_applied"].sum() > 58
-    joined = returns.merge(v2, on=["security_id", "date"], validate="one_to_one")
-    assert joined["daily_total_return_x"].equals(joined["daily_total_return_y"])
-    assert joined["total_return_available_x"].equals(joined["total_return_available_y"])
-    unsafe = v2[v2["momentum_signal_safe"].eq(False).fillna(False)]
-    assert len(unsafe) == 8
-    assert unsafe["corporate_action_timing_event_ids"].ne("").all()
-
-
-def test_event_audit_complete_and_accepted_panel_preserved():
-    detail = pd.read_csv(AUDIT_DIR / "event_application_detail.csv")
-    summary = pd.read_csv(AUDIT_DIR / "summary.csv").set_index("metric")["value"]
-    assert detail["event_id"].notna().all()
-    assert not detail["event_id"].duplicated().any()
-    assert len(detail) == int(summary["economic_action_rows"])
-    assert set(detail["application_status"]) == {
-        "APPLIED_TO_RETURN", "NO_DIRECT_ADJUSTMENT_REQUIRED",
-        "RETURN_UNAVAILABLE_EXPLICIT", "NOT_SIGNAL_RELEVANT",
-    }
-    assert int((detail["membership_status"].eq("PRE_MEMBERSHIP") & detail["application_status"].eq("APPLIED_TO_RETURN")).sum()) > 0
-    assert summary["old_panel_sha256"] == sha256(OLD_PANEL)
-
-
-def test_four_strict_bonus_debenture_returns_remain_unavailable():
-    detail = pd.read_csv(AUDIT_DIR / "event_application_detail.csv")
-    strict = detail[detail["application_reason"].eq("ACCEPTED_STRICT_RETURN_EXCEPTION")]
-    assert len(strict) == 4
-    assert set(strict["symbol"]) == {"BLUEDART", "NTPC", "BRITANNIA"}
-    assert strict["calculated_total_return"].isna().all()

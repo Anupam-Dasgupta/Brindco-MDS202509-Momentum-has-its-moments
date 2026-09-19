@@ -14,12 +14,11 @@ from brindco_momentum.paths import ROOT
 PROCESSED = ROOT / "data" / "processed"
 PANEL = PROCESSED / "research_panel_v2.parquet"
 RETURNS = PROCESSED / "stock_total_returns.parquet"
-OLD_PANEL = PROCESSED / "research_panel_build.parquet"
 MEMBERSHIP = PROCESSED / "membership_official" / "nifty500_official_membership_intervals.parquet"
 CALENDAR = PROCESSED / "nse_trading_calendar_2013_2026.parquet"
 DELAYED = PROCESSED / "corporate_action_treatment" / "bonus_debenture_delayed_recognition.csv"
-TIMING = ROOT / "results" / "corporate_action_treatment" / "bonus_debenture_signal_timing_audit.csv"
-UNRESOLVED = ROOT / "results" / "stock_total_return_audit" / "unresolved_events.csv"
+TIMING = PROCESSED / "runtime_inputs" / "bonus_debenture_signal_timing_audit.csv"
+UNRESOLVED = PROCESSED / "runtime_inputs" / "unresolved_events.csv"
 MONTHLY_OUTPUT = PROCESSED / "momentum_monthly_features.parquet"
 FORMATIONS_OUTPUT = PROCESSED / "momentum_formations.parquet"
 WINNERS_OUTPUT = PROCESSED / "momentum_winners.parquet"
@@ -34,8 +33,6 @@ DELAYED_IDS = {"CA_faa277a19bfa2ac115cc", "CA_df82d8fc43ad7e21c2a8"}
 def require_corrected_sources(panel_path: Path = PANEL, returns_path: Path = RETURNS) -> None:
     if panel_path.resolve() != PANEL.resolve() or returns_path.resolve() != RETURNS.resolve():
         raise ValueError("Momentum requires research_panel_v2 and stock_total_returns; panel v1 is revoked")
-    if panel_path == OLD_PANEL or returns_path == OLD_PANEL:
-        raise ValueError("Old panel total returns are revoked")
 
 
 def read_parquet_before_cutoff(path: Path, columns: list[str], date_column: str) -> pd.DataFrame:
@@ -220,10 +217,11 @@ def build_monthly(panel: pd.DataFrame, calendar: pd.DataFrame,
     return monthly
 
 
-def build_roster(membership: pd.DataFrame, calendar: pd.DataFrame) -> pd.DataFrame:
+def build_roster(membership: pd.DataFrame, calendar: pd.DataFrame,
+                 last_formation: pd.Period = LAST_FORMATION) -> pd.DataFrame:
     formation_dates = calendar.loc[calendar["is_last_trading_day_of_month"], "date"]
     formation_dates = formation_dates.loc[
-        formation_dates.dt.to_period("M").between(FIRST_FORMATION, LAST_FORMATION)
+        formation_dates.dt.to_period("M").between(FIRST_FORMATION, last_formation)
     ]
     rosters = []
     for date in formation_dates:

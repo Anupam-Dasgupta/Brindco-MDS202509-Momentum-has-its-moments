@@ -1,2 +1,0 @@
-account,last_valid_date,valid_daily_nav_rows,blocker,scenario,unpriced_rights_nav_rows,unpriced_fractional_split_claim_count,unpriced_fractional_split_quantity,maximum_value_bearing_market_date_read,last_market_date_processed,unspendable_dividend_count,unspendable_dividend_amount,unavailable_bonus_count,unavailable_bonus_units,unavailable_bonus_value,max_nav_reconciliation_error,dhani_event_status
-FIX,2023-03-31,1982,null,FROZEN_CORPORATE_ACTION_FRAMEWORK,16,1,0.5,2023-03-31,2023-03-31,567,608761.69,26,11328.522222222222,1769511.3344444444,0.0,LAPSED_UNEXERCISED

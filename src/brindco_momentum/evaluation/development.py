@@ -9,8 +9,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from brindco_momentum.data.settlement_calendar import CUTOFF, ROOT, START
-from brindco_momentum.evaluation.figures import make_figures
+from brindco_momentum.execution.development_accounts import CUTOFF, START
+from brindco_momentum.paths import ROOT
 
 
 OUT = ROOT / "results/evaluation_development"
@@ -410,7 +410,7 @@ the latest recorded *previous-close* NAV on each trade day, then multiplies by
 252 / 1,982. The first five NSE sessions' funding trades are excluded from
 that recurring rate and reported separately. The frozen ledger has no
 open-marked contemporaneous pre-trade NAV, so this is a labelled operational
-turnover measure, not the exact intraday denominator specified in plan.md.
+turnover measure, not the exact intraday denominator described in METHODOLOGY.md.
 RT-equivalent turnover is half gross turnover. The weighted effective RT cost
 is twice total actual fees-plus-impact divided by total executed consideration;
 buy and sell rates are shown separately.
@@ -428,8 +428,6 @@ frozen account scenario and limit interpretation of the results. No parameter
 or frozen account artifact is changed here.
 """
     (output_dir / "EVALUATION_NOTES.md").write_text(notes, encoding="utf-8")
-    make_figures(output_dir / "figures", daily_table, summary_table, tri_daily, overlay,
-                 pd.DataFrame(costs))
     print(f"Development evaluation: {len(summary_table)} accounts, {len(dates)} sessions through "
           f"{CUTOFF.date()}; outputs in {output_dir}")
 
